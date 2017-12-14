@@ -15,6 +15,6 @@ Wanna add something:
 
 Please explain us why do you think this is an issue: 
 
-##In which type of Android device this occurs? (If it's only computer please write it). 
+## In which type of Android device this occurs? (If it's only computer please write it). 
 
 
