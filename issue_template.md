@@ -14,3 +14,7 @@ Wanna add something:
 [ ] Performance of the app
 
 Please explain us why do you think this is an issue: 
+
+##In which type of Android device this occurs? (If it's only computer please write it). 
+
+
