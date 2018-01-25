@@ -45,7 +45,6 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             if (tiempoControles > 2.0f)
             {
                 imageControles.fillAmount = 0;
-                print("Ha tocado el botón de controles mas de 2 segunods");
                 panelControles.SetActive(true);
                 isTouchingControles = false;
             }

@@ -1,21 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-
 
 public class OptionsPreferences : MonoBehaviour
 {
-    //Variables para cambiar las fuentes
-    public int contadorFuentes = 0;
-    Text[] textosJuego;
+    int fontCounter = 0;
     [SerializeField]
     Font[] fuentes;
+    [SerializeField]
+    GameObject checkmarkVoice, checkmarkVoiceAnimal;
+    [SerializeField]
+    Text languageText;
+    [SerializeField]
+    Image flag;
 
-    // Use this for initialization
-    void Start()
+    void Awake()
     {
-        print("Se inicia el script");
+
         if (PlayerPrefs.GetInt("FirstTime") == 0)
         {
             DefaultOptions();
@@ -23,34 +23,46 @@ public class OptionsPreferences : MonoBehaviour
         }
         else
         {
-            //Poner el lenguaje
-            //Actualizar los checkmarcks 
-            //Y ponemos la fuente del usuario  
-            contadorFuentes = GetUserFont();
+            checkCurrentLanguage();
+            checkVoiceActivated();
+            fontCounter = GetUserFont();
             SetFontToLabels();
         }
     }
 
-   
-
     void DefaultOptions()
     {
-        SetLanguage("Spanish");
+        SetLanguage(0);
         SetVoiceActivated(1);
-        SetAnimalVoiceActivated(1);
+        SetAnimalSoundsActivated(1);
         SetUserFont(0);
     }
 
-    public bool GetVoiceActivated()
+    //Human Voice 
+    bool GetVoiceActivated()
     {
         if (PlayerPrefs.GetInt("VoiceActivated") == 0)
-        {
             return false;
-        }
         else
-        {
             return true;
-        }
+    }
+
+    void checkVoiceActivated()
+    {
+        if (GetVoiceActivated())
+            checkmarkVoice.SetActive(true);
+        else
+            checkmarkVoice.SetActive(false);
+    }
+
+    public void VoiceHasBeenChanged()
+    {
+        if (GetVoiceActivated())
+            SetVoiceActivated(0);
+        else
+            SetVoiceActivated(1);
+
+        checkVoiceActivated();
     }
 
     public void SetVoiceActivated(int _voice)
@@ -58,32 +70,80 @@ public class OptionsPreferences : MonoBehaviour
         PlayerPrefs.SetInt("VoiceActivated", _voice);
     }
 
-    public bool GetAnimalSounds()
+    //Animal Voice
+    bool GetAnimalSoundsActivated()
     {
         if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 0)
-        {
             return false;
-        }
         else
-        {
             return true;
-        }
     }
 
-    public void SetAnimalVoiceActivated(int _animal)
+    void checkAnimalSoundsActivated()
+    {
+        if (GetAnimalSoundsActivated())
+            checkmarkVoiceAnimal.SetActive(true);
+        else
+            checkmarkVoiceAnimal.SetActive(false);
+    }
+
+    public void AnimalSoundHasBeenChanged()
+    {
+        if (GetAnimalSoundsActivated())
+            SetAnimalSoundsActivated(0);
+        else
+            SetAnimalSoundsActivated(1);
+
+        checkAnimalSoundsActivated();
+    }
+
+    public void SetAnimalSoundsActivated(int _animal)
     {
         PlayerPrefs.SetInt("AnimalVoiceActivated", _animal);
     }
 
-    public string GetLanguage()
+    //Language
+    void checkCurrentLanguage()
     {
-        return PlayerPrefs.GetString("Language");
+        if(GetLanguage() == 0){
+            languageText.text = "Idioma: Español";
+            flag.sprite = Resources.Load<Sprite>("spanish_flag");
+        } else if(GetLanguage() == 1)
+        {
+            languageText.text = "Language: English";
+            flag.sprite = Resources.Load<Sprite>("english_flag");
+        }
     }
 
-    public void SetLanguage(string _language)
+    public void LanguageChanged()
     {
-        PlayerPrefs.SetString("Language", _language);
+        print(GetLanguage());
+        print(Constantes.languages.Count);
+        int languageCounter = GetLanguage();
+        if(languageCounter == Constantes.languages.Count - 1)
+        {
+            SetLanguage(0);
+        } else
+        {
+            SetLanguage(++languageCounter);
+        }
+
+        checkCurrentLanguage();
     }
+
+    int GetLanguage()
+    {
+        return PlayerPrefs.GetInt("Language");
+    }
+
+    void SetLanguage(int _language)
+    {
+        PlayerPrefs.SetInt("Language", _language);
+    }
+
+
+
+
 
     void SetUserFont(int _fuente)
     {
@@ -97,25 +157,26 @@ public class OptionsPreferences : MonoBehaviour
 
     void SetFontToLabels()
     {
-        textosJuego = GameObject.FindObjectsOfType<Text>();
-        for (int i = 0; i < textosJuego.Length; i++)
+        print("PONEMOS LA FUENTE A TODOS LOS TEXTOS");
+        Text[] allTexts = GameObject.FindObjectsOfType<Text>();
+        for (int i = 0; i < allTexts.Length; i++)
         {
-            textosJuego[i].font = fuentes[contadorFuentes];
+            allTexts[i].font = fuentes[fontCounter];
         }
-        SetUserFont(contadorFuentes);
+        SetUserFont(fontCounter);
     }
-    
 
+  
     public void ChangeFontButton()
     {
-        contadorFuentes++;
+        fontCounter++;
         //Comprobamos si está al final
-        if (contadorFuentes == fuentes.Length)
+        if (fontCounter == fuentes.Length)
         {
-            contadorFuentes = 0;
+            fontCounter = 0;
         }
 
         SetFontToLabels();
-        
+
     }
 }

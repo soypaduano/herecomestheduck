@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Audio;
+﻿using UnityEngine;
 
 public class ControladorAudio : MonoBehaviour {
 
     AudioSource audioSource;
 
-	// Use this for initialization
 	void Start () {
         SearchObjects();
-	}
+        EasyTTSUtil.Initialize(EasyTTSUtil.Spain);
+    }
 	
     void SearchObjects()
     {
@@ -21,13 +18,16 @@ public class ControladorAudio : MonoBehaviour {
     {
         print(_name);
         audioSource.clip = Resources.Load<AudioClip>(_name);
-        audioSource.Play();
+        audioSource.PlayDelayed(0.5f);
     }
 
+    public void StopSound()
+    {
+        audioSource.Stop();
+    }
 
-
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public void Speak(string _word)
+    {
+        EasyTTSUtil.SpeechAdd(_word);
+    }
 }
