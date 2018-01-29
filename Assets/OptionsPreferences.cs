@@ -12,6 +12,10 @@ public class OptionsPreferences : MonoBehaviour
     Text languageText;
     [SerializeField]
     Image flag;
+    [SerializeField]
+    Slider slider;
+    [SerializeField]
+    Text speedGame;
 
     void Awake()
     {
@@ -27,6 +31,7 @@ public class OptionsPreferences : MonoBehaviour
             checkVoiceActivated();
             fontCounter = GetUserFont();
             SetFontToLabels();
+            SetGameSpeedToSlider();
         }
     }
 
@@ -36,6 +41,7 @@ public class OptionsPreferences : MonoBehaviour
         SetVoiceActivated(1);
         SetAnimalSoundsActivated(1);
         SetUserFont(0);
+        SetGameSpeed(2);
     }
 
     //Human Voice 
@@ -141,10 +147,7 @@ public class OptionsPreferences : MonoBehaviour
         PlayerPrefs.SetInt("Language", _language);
     }
 
-
-
-
-
+    //FONTS
     void SetUserFont(int _fuente)
     {
         PlayerPrefs.SetInt("Font", _fuente);
@@ -166,7 +169,6 @@ public class OptionsPreferences : MonoBehaviour
         SetUserFont(fontCounter);
     }
 
-  
     public void ChangeFontButton()
     {
         fontCounter++;
@@ -179,4 +181,30 @@ public class OptionsPreferences : MonoBehaviour
         SetFontToLabels();
 
     }
+
+    //SPEED LABEL
+    public void SliderValueChanged()
+    {
+        speedGame.text = "Velocidad de juego: " + slider.value;
+        SetGameSpeed(slider.value);
+    }
+
+    void SetGameSpeed(float _speed)
+    {
+        PlayerPrefs.SetFloat("GameSpeed", _speed);
+    }
+
+    public float getGameSpeed()
+    {
+        return PlayerPrefs.GetFloat("GameSpeed");
+    }
+
+    void SetGameSpeedToSlider()
+    {
+        slider.value = getGameSpeed();
+    }
 }
+
+
+
+

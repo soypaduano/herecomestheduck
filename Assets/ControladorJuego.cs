@@ -12,8 +12,9 @@ public class ControladorJuego : MonoBehaviour
     Text nameOfAnimal, soundOfAnimal;
     Image imageOfAnimalPopUp;
     ControladorAudio controladorAudio;
+    OptionsPreferences optionsContoller;
     bool showingAnimal, showingWin;
-    float timeOfImagePanel = 5f;
+    float timeOfImagePanel;
     int contadorAnimales;
 
     public struct Animal
@@ -32,6 +33,8 @@ public class ControladorJuego : MonoBehaviour
     {
         SearchObjects();
         FillArray();
+        timeOfImagePanel = optionsContoller.getGameSpeed();
+        print(timeOfImagePanel);
     }
 
     void FillArray()
@@ -54,6 +57,7 @@ public class ControladorJuego : MonoBehaviour
 
     void SearchObjects()
     {
+        optionsContoller = GameObject.Find("GamePreferences").GetComponent<OptionsPreferences>();
         popUpNewAnimal = GameObject.Find("PopUpAnimalNuevo");
         nameOfAnimal = GameObject.Find("TextoAnimal").GetComponent<Text>();
         controladorAudio = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
@@ -82,7 +86,7 @@ public class ControladorJuego : MonoBehaviour
             if (timeOfImagePanel < 0)
             {
                 showingAnimal = false;
-                timeOfImagePanel = 1f;
+                timeOfImagePanel = optionsContoller.getGameSpeed();
                 ShowHidePopUp(false);
                 controladorAudio.StopSound();
 
@@ -90,7 +94,7 @@ public class ControladorJuego : MonoBehaviour
                 if (contadorAnimales == 16)
                 {
                     showingWin = true;
-                    timeOfImagePanel = 5f;
+                    timeOfImagePanel = optionsContoller.getGameSpeed();
                     ShowHidePopUp(true);
                     nameOfAnimal.text = "YOU FUCKING WON";
                     soundOfAnimal.text = "YEY BRO";
