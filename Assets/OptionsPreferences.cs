@@ -182,7 +182,7 @@ public class OptionsPreferences : MonoBehaviour
 
     }
 
-    //SPEED LABEL
+    //SPEED SLIDER
     public void SliderValueChanged()
     {
         speedGame.text = "Velocidad de juego: " + slider.value;

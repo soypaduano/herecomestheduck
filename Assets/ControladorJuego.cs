@@ -76,51 +76,17 @@ public class ControladorJuego : MonoBehaviour
         }
     }
 
-    void Update()
-    {
-        //PANEL DE LA IMAGEN SE MUESTRA
-        if (showingAnimal)
-        {
-            timeOfImagePanel -= Time.deltaTime;
-
-            if (timeOfImagePanel < 0)
-            {
-                showingAnimal = false;
-                timeOfImagePanel = optionsContoller.getGameSpeed();
-                ShowHidePopUp(false);
-                controladorAudio.StopSound();
-
-                //CUANDO JUGADOR GANAA.....
-                if (contadorAnimales == 16)
-                {
-                    showingWin = true;
-                    timeOfImagePanel = optionsContoller.getGameSpeed();
-                    ShowHidePopUp(true);
-                    nameOfAnimal.text = "YOU FUCKING WON";
-                    soundOfAnimal.text = "YEY BRO";
-                }
-
-            }
-        }
-
-        if (showingWin)
-        {
-            timeOfImagePanel -= Time.deltaTime;
-            //Y OCULTAMOS EL PANEL DE GANAR
-            if(timeOfImagePanel < 0)
-            {
-                showingWin = false;
-                timeOfImagePanel = 5f;
-                ShowHidePopUp(false);
-                RestaurarJuego();
-            }
-        }
-    }
-
     void ShowHidePopUp(bool _bool)
     {
         popUpNewAnimal.SetActive(_bool);
         popUpNewAnimal.transform.parent.gameObject.SetActive(_bool); //Ocultamos a su padre, que es el fondo negro
+    }
+
+    void FinishShowingAnimal()
+    {
+        timeOfImagePanel = optionsContoller.getGameSpeed();
+        ShowHidePopUp(false);
+        controladorAudio.StopSound();
     }
 
     void RestaurarJuego()
@@ -140,27 +106,13 @@ public class ControladorJuego : MonoBehaviour
         //USUARIO PIERDE
         if (animal.name == "pto")
         {
-            showingAnimal = true;
-            ShowHidePopUp(true);
-            nameOfAnimal.text = animal.name;
-            soundOfAnimal.text = "Sonido: " + Constantes.FirstLetterToUpper(animal.sound) + "!";
-            controladorAudio.PlaySound(animal.name);
-            SetImage(animal.name);
+            StartCoroutine(ShowAnimalCorutine(animal, numeroRandom));
             RestaurarJuego();
         }
         else
         {
-
-            //SIGUE JUGANDO
-            SetImage(animal.name);
+            StartCoroutine(ShowAnimalCorutine(animal, numeroRandom));
             contadorAnimales++;
-            showingAnimal = true;
-            ShowHidePopUp(true);
-            nameOfAnimal.text = Constantes.FirstLetterToUpper(animal.name);
-            soundOfAnimal.text = "Sonido: " + animal.sound + "!";
-            controladorAudio.Speak(animal.name);
-            controladorAudio.PlaySound(animal.name);
-            animalList.RemoveAt(numeroRandom);
         }
     }
 
@@ -173,4 +125,34 @@ public class ControladorJuego : MonoBehaviour
         //PANEL DE ANIMAL
         imageOfAnimalPopUp.sprite = Resources.Load<Sprite>(nombreAnimal);
     }
+
+
+    IEnumerator ShowAnimalCorutine(Animal _animal, int _randomNumber)
+    {
+
+        SetImage(_animal.name);
+        ShowHidePopUp(true);
+        nameOfAnimal.text = Constantes.FirstLetterToUpper(_animal.name);
+        soundOfAnimal.text = "Sonido: " + _animal.sound + "!";
+        controladorAudio.Speak(_animal.name);
+        controladorAudio.PlaySound(_animal.name);
+        animalList.RemoveAt(_randomNumber);
+
+        yield return new WaitForSeconds(4f);
+        FinishShowingAnimal();
+
+      
+        if (contadorAnimales == 3)
+        {
+            yield return new WaitForSeconds(1f);
+            ShowHidePopUp(true);
+            nameOfAnimal.text = "You won damn";
+            soundOfAnimal.text = "Damn son";
+            yield return new WaitForSeconds(4f);
+            FinishShowingAnimal();
+            RestaurarJuego();
+        }
+    }
 }
+
+

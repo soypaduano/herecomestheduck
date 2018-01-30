@@ -67,12 +67,11 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     {
         if(gameObject.name == "BotonInstrucciones")
         {
-            isTouchingInstrucciones = true;
-            isTouchingControles = false;
+            //if(blindMode)
+            panelInstrucciones.SetActive(true);
         } else if(gameObject.name == "BotonControles")
         {
-            isTouchingControles = true;
-            isTouchingInstrucciones = false;
+            panelControles.SetActive(true);
         }
 
     }
