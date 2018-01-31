@@ -14,10 +14,13 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     public GameObject panelInstrucciones, panelControles;
 
     [SerializeField]
-    Image imageInstrucciones, imageControles;
+    Image imageFillInstrucciones, imageFillControles, imageInstruction, imageControl;
 
     [SerializeField] //TODO: Queremos esto serialized?
     GameObject botonInstrucciones, botonControles;
+
+
+    
 
 
 	// Use this for initialization
@@ -32,11 +35,11 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         if (isTouchingInstrucciones)
         {
             tiempoInstrucciones += Time.deltaTime;
-            imageInstrucciones.fillAmount = imageInstrucciones.fillAmount + (Time.deltaTime / 2f);
+            imageFillInstrucciones.fillAmount = imageFillInstrucciones.fillAmount + (Time.deltaTime / 2f);
             if (tiempoInstrucciones > 2.0f)
             {
                 print("Ha tocado el botón de instrucciones mas de 2 segunods");
-                imageInstrucciones.fillAmount = 0;
+                imageFillInstrucciones.fillAmount = 0;
                 panelInstrucciones.SetActive(true);
                 isTouchingInstrucciones = false;
             }
@@ -45,10 +48,10 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         if (isTouchingControles)
         {
             tiempoControles += Time.deltaTime;
-            imageControles.fillAmount = imageControles.fillAmount + (Time.deltaTime / 2f);
+            imageFillControles.fillAmount = imageFillControles.fillAmount + (Time.deltaTime / 2f);
             if (tiempoControles > 2.0f)
             {
-                imageControles.fillAmount = 0;
+                imageFillControles.fillAmount = 0;
                 panelControles.SetActive(true);
                 isTouchingControles = false;
             }
@@ -60,11 +63,11 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         //Reiniciamos todo lo de instrucciones
         isTouchingInstrucciones = false;
         tiempoInstrucciones = 0;
-        imageInstrucciones.fillAmount = 0;
+        imageFillInstrucciones.fillAmount = 0;
         //Reiniciamos todo lo de controles
         isTouchingControles = false;
         tiempoControles = 0;
-        imageControles.fillAmount = 0;
+        imageFillControles.fillAmount = 0;
     }
 
     public void OnPointerDown(PointerEventData data)
@@ -76,11 +79,13 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 panelInstrucciones.SetActive(true);
                 botonControles.SetActive(false);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
-            } else
+                imageInstruction.sprite =  Resources.Load<Sprite>("close");
+            }  else
             {
                 panelInstrucciones.SetActive(false);
                 botonControles.SetActive(true);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Instrucciones";
+                imageInstruction.sprite =  Resources.Load<Sprite>("info");
             }
         } else if(gameObject.name == "BotonControles")
         {
@@ -89,11 +94,13 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 panelControles.SetActive(true);
                 botonInstrucciones.SetActive(false);
                 botonControles.GetComponentInChildren<Text>().text = "Cerrar";
+                imageControl.sprite = Resources.Load<Sprite>("close");
             } else
             {
                 panelControles.SetActive(false);
                 botonInstrucciones.SetActive(true);
                 botonControles.GetComponentInChildren<Text>().text = "Controles";
+                imageControl.sprite = Resources.Load<Sprite>("settings");
             }
             
         }
