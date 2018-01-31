@@ -142,7 +142,7 @@ public class ControladorJuego : MonoBehaviour
         FinishShowingAnimal();
 
       
-        if (contadorAnimales == 3)
+        if (contadorAnimales == 16)
         {
             yield return new WaitForSeconds(1f);
             ShowHidePopUp(true);

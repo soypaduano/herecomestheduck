@@ -16,6 +16,10 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     [SerializeField]
     Image imageInstrucciones, imageControles;
 
+    [SerializeField] //TODO: Queremos esto serialized?
+    GameObject botonInstrucciones, botonControles;
+
+
 	// Use this for initialization
 	void Start () {
         panelInstrucciones.SetActive(false);
@@ -67,11 +71,31 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     {
         if(gameObject.name == "BotonInstrucciones")
         {
-            //if(blindMode)
-            panelInstrucciones.SetActive(true);
+            if (botonControles.activeInHierarchy)
+            {
+                panelInstrucciones.SetActive(true);
+                botonControles.SetActive(false);
+                botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
+            } else
+            {
+                panelInstrucciones.SetActive(false);
+                botonControles.SetActive(true);
+                botonInstrucciones.GetComponentInChildren<Text>().text = "Instrucciones";
+            }
         } else if(gameObject.name == "BotonControles")
         {
-            panelControles.SetActive(true);
+            if (botonInstrucciones.activeInHierarchy)
+            {
+                panelControles.SetActive(true);
+                botonInstrucciones.SetActive(false);
+                botonControles.GetComponentInChildren<Text>().text = "Cerrar";
+            } else
+            {
+                panelControles.SetActive(false);
+                botonInstrucciones.SetActive(true);
+                botonControles.GetComponentInChildren<Text>().text = "Controles";
+            }
+            
         }
 
     }

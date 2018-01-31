@@ -7,15 +7,14 @@ public class OptionsPreferences : MonoBehaviour
     [SerializeField]
     Font[] fuentes;
     [SerializeField]
-    GameObject checkmarkVoice, checkmarkVoiceAnimal;
-    [SerializeField]
     Text languageText;
     [SerializeField]
     Image flag;
     [SerializeField]
     Slider slider;
     [SerializeField]
-    Text speedGame;
+    Text speedGame, HumanVoiceActivated, AnimalVoiceActivated;
+    
 
     void Awake()
     {
@@ -26,13 +25,8 @@ public class OptionsPreferences : MonoBehaviour
             PlayerPrefs.SetInt("FirstTime", 1);
         }
         else
-        {
-            checkCurrentLanguage();
-            checkVoiceActivated();
-            fontCounter = GetUserFont();
-            SetFontToLabels();
-            SetGameSpeedToSlider();
-        }
+            CheckAllOptions();
+
     }
 
     void DefaultOptions()
@@ -56,9 +50,9 @@ public class OptionsPreferences : MonoBehaviour
     void checkVoiceActivated()
     {
         if (GetVoiceActivated())
-            checkmarkVoice.SetActive(true);
+            HumanVoiceActivated.text = "Voz humana: Sí";
         else
-            checkmarkVoice.SetActive(false);
+            HumanVoiceActivated.text = "Voz humana: No";
     }
 
     public void VoiceHasBeenChanged()
@@ -77,28 +71,20 @@ public class OptionsPreferences : MonoBehaviour
     }
 
     //Animal Voice
-    bool GetAnimalSoundsActivated()
-    {
-        if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 0)
-            return false;
-        else
-            return true;
-    }
-
     void checkAnimalSoundsActivated()
     {
-        if (GetAnimalSoundsActivated())
-            checkmarkVoiceAnimal.SetActive(true);
+        if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 1)
+            AnimalVoiceActivated.text = "Sonido de animales: Sí";
         else
-            checkmarkVoiceAnimal.SetActive(false);
+            AnimalVoiceActivated.text = "Sonido de animales: No";
     }
 
     public void AnimalSoundHasBeenChanged()
     {
-        if (GetAnimalSoundsActivated())
-            SetAnimalSoundsActivated(0);
-        else
+        if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 0) {
             SetAnimalSoundsActivated(1);
+        } else
+            SetAnimalSoundsActivated(0);
 
         checkAnimalSoundsActivated();
     }
@@ -160,7 +146,7 @@ public class OptionsPreferences : MonoBehaviour
 
     void SetFontToLabels()
     {
-        print("PONEMOS LA FUENTE A TODOS LOS TEXTOS");
+
         Text[] allTexts = GameObject.FindObjectsOfType<Text>();
         for (int i = 0; i < allTexts.Length; i++)
         {
@@ -202,6 +188,24 @@ public class OptionsPreferences : MonoBehaviour
     void SetGameSpeedToSlider()
     {
         slider.value = getGameSpeed();
+    }
+
+    //DEFAULT OPTIONS BUTTON
+    public void DefaultOptionsButton()
+    {
+        DefaultOptions();
+        CheckAllOptions();
+
+    }
+
+    void CheckAllOptions()
+    {
+        checkVoiceActivated();
+        fontCounter = GetUserFont();
+        SetFontToLabels();
+        checkAnimalSoundsActivated();
+        checkCurrentLanguage();
+        SetGameSpeedToSlider();
     }
 }
 
