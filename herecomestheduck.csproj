@@ -84,15 +84,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Constantes.cs" />
-    <Compile Include="Assets\ControladorAudio.cs" />
-    <Compile Include="Assets\ControladorJuego.cs" />
     <Compile Include="Assets\EasyTTS\EasyTTSDemo\DemoEasyTTS.cs" />
     <Compile Include="Assets\EasyTTS\EasyTTSDemo\DemoEasyTTS_AdvanceFeature.cs" />
     <Compile Include="Assets\EasyTTS\EasyTTSDemo\DemoEasyTTS_SelectEngine.cs" />
     <Compile Include="Assets\EasyTTS\EasyTTSUtil.cs" />
-    <Compile Include="Assets\OptionsPreferences.cs" />
-    <Compile Include="Assets\UIController.cs" />
+    <Compile Include="Assets\Scripts\Constantes.cs" />
+    <Compile Include="Assets\Scripts\ControladorAudio.cs" />
+    <Compile Include="Assets\Scripts\ControladorJuego.cs" />
+    <Compile Include="Assets\Scripts\InstructionsController.cs" />
+    <Compile Include="Assets\Scripts\OptionsPreferences.cs" />
+    <Compile Include="Assets\Scripts\UIController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\EasyTTS\EasyTTSReadMe.txt" />
