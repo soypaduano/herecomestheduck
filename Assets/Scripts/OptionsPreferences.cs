@@ -14,11 +14,13 @@ public class OptionsPreferences : MonoBehaviour
     Slider slider;
     [SerializeField]
     Text speedGame, HumanVoiceActivated, AnimalVoiceActivated;
-    
+    Text[] allTexts;
+
+
 
     void Awake()
     {
-
+        allTexts = GameObject.FindObjectsOfType<Text>();
         if (PlayerPrefs.GetInt("FirstTime") == 0)
         {
             DefaultOptions();
@@ -147,7 +149,7 @@ public class OptionsPreferences : MonoBehaviour
     void SetFontToLabels()
     {
 
-        Text[] allTexts = GameObject.FindObjectsOfType<Text>();
+        
         for (int i = 0; i < allTexts.Length; i++)
         {
             allTexts[i].font = fuentes[fontCounter];

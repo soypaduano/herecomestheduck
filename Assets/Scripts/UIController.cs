@@ -9,19 +9,12 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     //Variables del juego
     bool isTouchingInstrucciones, isTouchingControles;
     float tiempoInstrucciones, tiempoControles;
-
     //Paneles
     public GameObject panelInstrucciones, panelControles;
-
     [SerializeField]
     Image imageFillInstrucciones, imageFillControles, imageInstruction, imageControl;
-
     [SerializeField] //TODO: Queremos esto serialized?
     GameObject botonInstrucciones, botonControles;
-
-
-    
-
 
 	// Use this for initialization
 	void Start () {
