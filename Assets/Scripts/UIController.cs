@@ -74,7 +74,7 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 botonControles.SetActive(false);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
                 imageInstruction.sprite =  Resources.Load<Sprite>("close");
-                instructionsController = GameObject.Find("ControladorInstruccionesº").GetComponent<InstructionsController>();
+                instructionsController = GameObject.Find("ControladorInstrucciones").GetComponent<InstructionsController>();
                 instructionsController.ReproducirInstrucciones();
             }  else
             {

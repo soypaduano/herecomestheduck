@@ -11,9 +11,9 @@ public class OptionsPreferences : MonoBehaviour
     [SerializeField]
     Image flag;
     [SerializeField]
-    Slider slider;
+    Slider sliderSpeed, sliderDifficulty;
     [SerializeField]
-    Text speedGame, HumanVoiceActivated, AnimalVoiceActivated;
+    Text speedGame, HumanVoiceActivated, AnimalVoiceActivated, difficultyText;
     Text[] allTexts;
 
 
@@ -38,6 +38,7 @@ public class OptionsPreferences : MonoBehaviour
         SetAnimalSoundsActivated(1);
         SetUserFont(0);
         SetGameSpeed(2);
+        SetGameDifficulty(1);
     }
 
     //Human Voice 
@@ -165,8 +166,8 @@ public class OptionsPreferences : MonoBehaviour
     //SPEED SLIDER
     public void SliderValueChanged()
     {
-        speedGame.text = "Velocidad de juego: " + slider.value;
-        SetGameSpeed(slider.value);
+        speedGame.text = "Velocidad de juego: " + sliderSpeed.value;
+        SetGameSpeed(sliderSpeed.value);
     }
 
     void SetGameSpeed(float _speed)
@@ -181,9 +182,96 @@ public class OptionsPreferences : MonoBehaviour
 
     void SetGameSpeedToSlider()
     {
-        slider.value = getGameSpeed();
-        speedGame.text = "Velocidad de juego: " + slider.value;
+        sliderSpeed.value = getGameSpeed();
+        speedGame.text = "Velocidad de juego: " + sliderSpeed.value;
     }
+
+
+    //GAME DIFFICULTY
+    public void SliderDifficultyChanged()
+    {
+        switch ((int)sliderDifficulty.value)
+        {
+            case 0:
+                difficultyText.text = "Dificultad: sin Pato";
+                SetGameDifficulty(0);
+                break;
+            case 1:
+                difficultyText.text = "Dificultad: fácil";
+                SetGameDifficulty(1);
+                break;
+            case 2:
+                difficultyText.text = "Dificultad: medio";
+                SetGameDifficulty(2);
+                break;
+            case 3:
+                difficultyText.text = "Dificultad: dificil";
+                SetGameDifficulty(3);
+                break;
+            default:
+                break;
+        }
+
+        print("UNA VEZ CAMBIAMOS EL SLIDER, EL VALOR DENTRO DE PLAYER PREFS ES...");
+        print(PlayerPrefs.GetFloat("GameDifficulty"));
+
+    }
+
+    void SetGameDifficulty(float _difficulty)
+    {
+        PlayerPrefs.SetFloat("GameDifficulty", _difficulty);
+    }
+
+   public float GetGameDifficulty()
+    {
+        int value;
+        switch ((int)PlayerPrefs.GetFloat("GameDifficulty")) {
+
+            case 0: //SIN PATO
+                value = 0;
+                break;
+            case 1:
+                value = 6;
+                break;
+            case 2:
+                value =  3;
+                break;
+            case 3:
+                value = 2;
+                break;
+            default:
+                value = 1;
+                break;
+        }
+
+        return value;
+
+    }
+
+    void SetDifficultyToSlider()
+    {
+        sliderDifficulty.value = PlayerPrefs.GetFloat("GameDifficulty");
+
+        switch ((int)sliderDifficulty.value)
+        {
+            case 0:
+                difficultyText.text = "Dificultad: sin Pato";
+                break;
+            case 1:
+                difficultyText.text = "Dificultad: fácil";
+                break;
+            case 2:
+                difficultyText.text = "Dificultad: medio";
+                break;
+            case 3:
+                difficultyText.text = "Dificultad: dificil";
+                break;
+            default:
+                break;
+        }
+    }
+
+    
 
     //DEFAULT OPTIONS BUTTON
     public void DefaultOptionsButton()
@@ -201,6 +289,7 @@ public class OptionsPreferences : MonoBehaviour
         checkAnimalSoundsActivated();
         checkCurrentLanguage();
         SetGameSpeedToSlider();
+        SetDifficultyToSlider();
     }
 }
 

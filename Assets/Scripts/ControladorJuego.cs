@@ -35,14 +35,27 @@ public class ControladorJuego : MonoBehaviour
         SearchObjects();
         FillArray();
         timeOfImagePanel = optionsContoller.getGameSpeed();
-        print(timeOfImagePanel);
     }
 
     void FillArray()
     {
+        print("RELLENAMOS AREAY");
+        int totalAnimals = 16;
+        if (optionsContoller.GetGameDifficulty() != 0)
+        {
+            totalAnimals = 15;
+            int posibilidadPato = Random.Range(0, (int)optionsContoller.GetGameDifficulty());
+            
+            if (posibilidadPato == 0)
+                animalList.Add(new Animal("pato", "cuac cuac!"));
+            else
+                print("no hay pato");
+        }
+
+       
 
         List<int> usedValues = new List<int>();
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < totalAnimals; i++)
         {
             int numeroRandom = Random.Range(0, Constantes.animales.Count);
 
@@ -133,7 +146,7 @@ public class ControladorJuego : MonoBehaviour
         controladorAudio.PlaySound(_animal.name);
         animalList.RemoveAt(_randomNumber);
 
-        yield return new WaitForSeconds(PlayerPrefs.GetFloat("GameSpeed"));
+        yield return new WaitForSeconds(optionsContoller.getGameSpeed());
         FinishShowingAnimal();
 
         if(_animal.name == "pato")
