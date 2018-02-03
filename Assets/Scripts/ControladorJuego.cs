@@ -13,9 +13,10 @@ public class ControladorJuego : MonoBehaviour
     Image imageOfAnimalPopUp;
     ControladorAudio controladorAudio;
     OptionsPreferences optionsContoller;
-    bool showingAnimal, showingWin;
+    bool showingAnimal;
     float timeOfImagePanel;
     int contadorAnimales;
+    bool gameOver = false;
 
     public struct Animal
     {
@@ -39,6 +40,7 @@ public class ControladorJuego : MonoBehaviour
 
     void FillArray()
     {
+
         List<int> usedValues = new List<int>();
         for (int i = 0; i < 16; i++)
         {
@@ -91,6 +93,7 @@ public class ControladorJuego : MonoBehaviour
 
     void RestaurarJuego()
     {
+        gameOver = false;
         OcultarImagenes();
         contadorAnimales = 0;
         animalList.Clear();
@@ -99,21 +102,13 @@ public class ControladorJuego : MonoBehaviour
 
     public void TouchScreen()
     {
-
-        int numeroRandom = Random.Range(0, animalList.Count);
-        Animal animal = animalList[numeroRandom];
-
-        //USUARIO PIERDE
-        if (animal.name == "pto")
+        if (!gameOver)
         {
-            StartCoroutine(ShowAnimalCorutine(animal, numeroRandom));
-            RestaurarJuego();
-        }
-        else
-        {
+            int numeroRandom = Random.Range(0, animalList.Count);
+            Animal animal = animalList[numeroRandom];
             StartCoroutine(ShowAnimalCorutine(animal, numeroRandom));
             contadorAnimales++;
-        }
+        }   
     }
 
     void SetImage(string nombreAnimal)
@@ -138,16 +133,32 @@ public class ControladorJuego : MonoBehaviour
         controladorAudio.PlaySound(_animal.name);
         animalList.RemoveAt(_randomNumber);
 
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(PlayerPrefs.GetFloat("GameSpeed"));
         FinishShowingAnimal();
 
+        if(_animal.name == "pato")
+        {
+            gameOver = true;
+            yield return new WaitForSeconds(1f);
+            ShowHidePopUp(true);
+            nameOfAnimal.text = "¡Vuelve a intentarlo!";
+            soundOfAnimal.text = "";
+            imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("animo");
+            yield return new WaitForSeconds(4f);
+            FinishShowingAnimal();
+            RestaurarJuego();
+        }
       
         if (contadorAnimales == 16)
         {
+            gameOver = true;
             yield return new WaitForSeconds(1f);
-            ShowHidePopUp(true);
-            nameOfAnimal.text = "You won damn";
-            soundOfAnimal.text = "Damn son";
+            ShowHidePopUp(true); 
+            nameOfAnimal.text = "¡Has ganado!";
+            soundOfAnimal.text = "Enhorabuena";
+            controladorAudio.Speak("Enhorabuena");
+            controladorAudio.PlaySound("aplausos");
+            imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("win");
             yield return new WaitForSeconds(4f);
             FinishShowingAnimal();
             RestaurarJuego();

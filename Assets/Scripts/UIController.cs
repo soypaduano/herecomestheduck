@@ -15,6 +15,7 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     Image imageFillInstrucciones, imageFillControles, imageInstruction, imageControl;
     [SerializeField] //TODO: Queremos esto serialized?
     GameObject botonInstrucciones, botonControles;
+    InstructionsController instructionsController;
 
 	// Use this for initialization
 	void Start () {
@@ -73,6 +74,8 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 botonControles.SetActive(false);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
                 imageInstruction.sprite =  Resources.Load<Sprite>("close");
+                instructionsController = GameObject.Find("ControladorInstruccionesº").GetComponent<InstructionsController>();
+                instructionsController.ReproducirInstrucciones();
             }  else
             {
                 panelInstrucciones.SetActive(false);

@@ -7,19 +7,21 @@ public class InstructionsController : MonoBehaviour {
 
     [SerializeField]
     ControladorAudio audioController;
-    GameObject[] allTexts;
+    public GameObject[] allTexts;
 
 	// Use this for initialization
 	void Start () {
-        allTexts = GameObject.FindGameObjectsWithTag("TextInstrucciones");
+        audioController = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
 	}
 
-
+  
     public void ReproducirInstrucciones()
     {
-        foreach(GameObject txt in allTexts)
+        foreach (GameObject txt in allTexts)
         {
-            audioController.PlaySound(txt.GetComponent<Text>().text);
+            print(txt.name);
+            string instruccion = txt.GetComponent<Text>().text;
+            audioController.Speak(instruccion);
         }
     }
 }

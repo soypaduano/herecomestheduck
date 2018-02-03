@@ -13,12 +13,15 @@ public class ControladorAudio : MonoBehaviour {
     {
         audioSource = gameObject.GetComponent<AudioSource>();
     }
+
     
     public void PlaySound(string _name)
     {
-        print(_name);
-        audioSource.clip = Resources.Load<AudioClip>(_name);
-        audioSource.PlayDelayed(0.5f);
+        if(PlayerPrefs.GetInt("AnimalVoiceActivated")  == 1)
+        {
+            audioSource.clip = Resources.Load<AudioClip>(_name);
+            audioSource.PlayDelayed(0.5f);
+        }
     }
 
     public void StopSound()
@@ -28,6 +31,7 @@ public class ControladorAudio : MonoBehaviour {
 
     public void Speak(string _word)
     {
-        EasyTTSUtil.SpeechAdd(_word);
+        if(PlayerPrefs.GetInt("VoiceActivated") == 1)
+            EasyTTSUtil.SpeechAdd(_word);
     }
 }

@@ -41,17 +41,9 @@ public class OptionsPreferences : MonoBehaviour
     }
 
     //Human Voice 
-    bool GetVoiceActivated()
-    {
-        if (PlayerPrefs.GetInt("VoiceActivated") == 0)
-            return false;
-        else
-            return true;
-    }
-
     void checkVoiceActivated()
     {
-        if (GetVoiceActivated())
+        if (PlayerPrefs.GetInt("VoiceActivated") == 1)
             HumanVoiceActivated.text = "Voz humana: Sí";
         else
             HumanVoiceActivated.text = "Voz humana: No";
@@ -59,7 +51,7 @@ public class OptionsPreferences : MonoBehaviour
 
     public void VoiceHasBeenChanged()
     {
-        if (GetVoiceActivated())
+        if (PlayerPrefs.GetInt("VoiceActivated") == 1)
             SetVoiceActivated(0);
         else
             SetVoiceActivated(1);
@@ -190,6 +182,7 @@ public class OptionsPreferences : MonoBehaviour
     void SetGameSpeedToSlider()
     {
         slider.value = getGameSpeed();
+        speedGame.text = "Velocidad de juego: " + slider.value;
     }
 
     //DEFAULT OPTIONS BUTTON
