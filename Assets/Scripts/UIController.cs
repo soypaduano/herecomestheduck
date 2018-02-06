@@ -16,11 +16,13 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     [SerializeField] //TODO: Queremos esto serialized?
     GameObject botonInstrucciones, botonControles;
     InstructionsController instructionsController;
+    ControladorAudio audioController;
 
 	// Use this for initialization
 	void Start () {
         panelInstrucciones.SetActive(false);
         panelControles.SetActive(false);
+        audioController = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
     }
 
 	
@@ -32,7 +34,6 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
             imageFillInstrucciones.fillAmount = imageFillInstrucciones.fillAmount + (Time.deltaTime / 2f);
             if (tiempoInstrucciones > 2.0f)
             {
-                print("Ha tocado el botón de instrucciones mas de 2 segunods");
                 imageFillInstrucciones.fillAmount = 0;
                 panelInstrucciones.SetActive(true);
                 isTouchingInstrucciones = false;
@@ -66,10 +67,11 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
 
     public void OnPointerDown(PointerEventData data)
     {
-        if(gameObject.name == "BotonInstrucciones")
+        if(gameObject.name == "Instrucciones")
         {
             if (botonControles.activeInHierarchy)
             {
+                audioController.Speak(gameObject.transform.GetComponentInChildren<Text>().text);
                 panelInstrucciones.SetActive(true);
                 botonControles.SetActive(false);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
@@ -78,21 +80,25 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 instructionsController.ReproducirInstrucciones();
             }  else
             {
+                audioController.Speak("Game Scene");
                 panelInstrucciones.SetActive(false);
                 botonControles.SetActive(true);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Instrucciones";
                 imageInstruction.sprite =  Resources.Load<Sprite>("info");
+                instructionsController.StopInstrucciones();
             }
-        } else if(gameObject.name == "BotonControles")
+        } else if(gameObject.name == "Controles")
         {
             if (botonInstrucciones.activeInHierarchy)
             {
+                audioController.Speak(gameObject.transform.GetComponentInChildren<Text>().text);
                 panelControles.SetActive(true);
                 botonInstrucciones.SetActive(false);
                 botonControles.GetComponentInChildren<Text>().text = "Cerrar";
                 imageControl.sprite = Resources.Load<Sprite>("close");
             } else
             {
+                audioController.Speak("Game Scene");
                 panelControles.SetActive(false);
                 botonInstrucciones.SetActive(true);
                 botonControles.GetComponentInChildren<Text>().text = "Controles";

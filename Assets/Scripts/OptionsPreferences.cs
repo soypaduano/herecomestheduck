@@ -95,10 +95,12 @@ public class OptionsPreferences : MonoBehaviour
         if(GetLanguage() == 0){
             languageText.text = "Idioma: Español";
             flag.sprite = Resources.Load<Sprite>("spanish_flag");
+            GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(0);
         } else if(GetLanguage() == 1)
         {
             languageText.text = "Language: English";
             flag.sprite = Resources.Load<Sprite>("english_flag");
+            GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(1);
         }
     }
 
@@ -118,7 +120,7 @@ public class OptionsPreferences : MonoBehaviour
         checkCurrentLanguage();
     }
 
-    int GetLanguage()
+    public int GetLanguage()
     {
         return PlayerPrefs.GetInt("Language");
     }
@@ -186,6 +188,18 @@ public class OptionsPreferences : MonoBehaviour
         speedGame.text = "Velocidad de juego: " + sliderSpeed.value;
     }
 
+    public void ChangeSpeedButton()
+    {
+        float counter = sliderSpeed.value;
+
+        if (counter == sliderSpeed.maxValue)
+            counter = sliderSpeed.minValue;
+        else
+            counter++;
+
+        SetGameSpeed(counter);
+        SetGameSpeedToSlider();
+    }
 
     //GAME DIFFICULTY
     public void SliderDifficultyChanged()
@@ -271,8 +285,20 @@ public class OptionsPreferences : MonoBehaviour
         }
     }
 
-    
+    public void ChangeDifficultyButton()
+    {
+       float counter = sliderDifficulty.value;
 
+        if (counter == sliderDifficulty.maxValue)
+            counter = sliderDifficulty.minValue;
+        else
+            counter++;
+
+        SetGameDifficulty(counter);
+        SetDifficultyToSlider();
+    }
+
+   
     //DEFAULT OPTIONS BUTTON
     public void DefaultOptionsButton()
     {

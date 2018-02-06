@@ -39,7 +39,6 @@ public class ControladorJuego : MonoBehaviour
 
     void FillArray()
     {
-        print("RELLENAMOS AREAY");
         int totalAnimals = 16;
         if (optionsContoller.GetGameDifficulty() != 0)
         {
@@ -171,7 +170,7 @@ public class ControladorJuego : MonoBehaviour
             soundOfAnimal.text = "Enhorabuena";
             controladorAudio.Speak("Enhorabuena");
             controladorAudio.PlaySound("aplausos");
-            imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("win");
+            imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("ganar");
             yield return new WaitForSeconds(4f);
             FinishShowingAnimal();
             RestaurarJuego();

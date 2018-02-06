@@ -13,8 +13,12 @@ public class InstructionsController : MonoBehaviour {
 	void Start () {
         audioController = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
 	}
-
-  
+    
+    public void StopInstrucciones()
+    {
+        audioController.StopSpeak();
+    }
+      
     public void ReproducirInstrucciones()
     {
         foreach (GameObject txt in allTexts)
