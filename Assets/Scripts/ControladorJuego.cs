@@ -7,16 +7,18 @@ public class ControladorJuego : MonoBehaviour
 {
 
     List<Animal> animalList = new List<Animal>();
-    GameObject popUpNewAnimal; //Panel donde se pondra el nuevo animal
+    GameObject popUpNewAnimal, instruction; //Panel donde se pondra el nuevo animal
     GameObject[] imagesAnimals;
     Text nameOfAnimal, soundOfAnimal;
     Image imageOfAnimalPopUp;
-    ControladorAudio controladorAudio;
+    ControladorAudio audioController;
     OptionsPreferences optionsContoller;
     bool showingAnimal;
     float timeOfImagePanel;
     int contadorAnimales;
     bool gameOver = false;
+    [SerializeField]
+    Text tituloInstruccion, instruccionInvidente;
 
     public struct Animal
     {
@@ -35,6 +37,17 @@ public class ControladorJuego : MonoBehaviour
         SearchObjects();
         FillArray();
         timeOfImagePanel = optionsContoller.getGameSpeed();
+        //TODO: Falta testear esto!
+        /*if (PlayerPrefs.GetInt("FirstTime") == 0)
+        {
+            audioController.Speak(tituloInstruccion.text);
+            audioController.Speak(instruccionInvidente.text);
+            PlayerPrefs.SetInt("FirstTime", 1);
+        }
+        else
+        {
+            audioController.Speak(tituloInstruccion.text);
+        }*/
     }
 
     void FillArray()
@@ -51,8 +64,6 @@ public class ControladorJuego : MonoBehaviour
                 print("no hay pato");
         }
 
-       
-
         List<int> usedValues = new List<int>();
         for (int i = 0; i < totalAnimals; i++)
         {
@@ -64,7 +75,10 @@ public class ControladorJuego : MonoBehaviour
             } while (Constantes.checkIfRandomInsideArray(usedValues, numeroRandom));
 
             usedValues.Add(numeroRandom);
-            animalList.Add(new Animal(Constantes.animales[numeroRandom], Constantes.soundAnimals[numeroRandom]));
+            if(optionsContoller.GetLanguage() == 0)
+                animalList.Add(new Animal(Constantes.animales[numeroRandom], Constantes.soundAnimals[numeroRandom]));
+            else
+                animalList.Add(new Animal(Constantes.animales_Ingles[numeroRandom], Constantes.soundAnimals[numeroRandom]));
         }
     }
     
@@ -74,11 +88,12 @@ public class ControladorJuego : MonoBehaviour
         optionsContoller = GameObject.Find("GamePreferences").GetComponent<OptionsPreferences>();
         popUpNewAnimal = GameObject.Find("PopUpAnimalNuevo");
         nameOfAnimal = GameObject.Find("TextoAnimal").GetComponent<Text>();
-        controladorAudio = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
+        audioController = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
         soundOfAnimal = GameObject.Find("TextoSonidoAnimal").GetComponent<Text>();
         imageOfAnimalPopUp = GameObject.Find("ImagePopUpAnimal").GetComponent<Image>();
         ShowHidePopUp(false);
         imagesAnimals = GameObject.FindGameObjectsWithTag("Imagen");
+        instruction = GameObject.Find("Instruccion");
         OcultarImagenes();
     }
 
@@ -100,11 +115,12 @@ public class ControladorJuego : MonoBehaviour
     {
         timeOfImagePanel = optionsContoller.getGameSpeed();
         ShowHidePopUp(false);
-        controladorAudio.StopSound();
+        audioController.StopSound();
     }
 
     void RestaurarJuego()
     {
+        instruction.SetActive(true);
         gameOver = false;
         OcultarImagenes();
         contadorAnimales = 0;
@@ -116,6 +132,7 @@ public class ControladorJuego : MonoBehaviour
     {
         if (!gameOver)
         {
+            instruction.SetActive(false);
             int numeroRandom = Random.Range(0, animalList.Count);
             Animal animal = animalList[numeroRandom];
             StartCoroutine(ShowAnimalCorutine(animal, numeroRandom));
@@ -141,8 +158,8 @@ public class ControladorJuego : MonoBehaviour
         ShowHidePopUp(true);
         nameOfAnimal.text = Constantes.FirstLetterToUpper(_animal.name);
         soundOfAnimal.text = "Sonido: " + _animal.sound + "!";
-        controladorAudio.Speak(_animal.name);
-        controladorAudio.PlaySound(_animal.name);
+        audioController.Speak(_animal.name);
+        audioController.PlaySound(_animal.name);
         animalList.RemoveAt(_randomNumber);
 
         yield return new WaitForSeconds(optionsContoller.getGameSpeed());
@@ -168,9 +185,9 @@ public class ControladorJuego : MonoBehaviour
             ShowHidePopUp(true); 
             nameOfAnimal.text = "¡Has ganado!";
             soundOfAnimal.text = "Enhorabuena";
-            controladorAudio.Speak("Enhorabuena");
-            controladorAudio.PlaySound("aplausos");
-            imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("ganar");
+            audioController.Speak("Enhorabuena");
+            audioController.PlaySound("aplausos");
+            imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("gana");
             yield return new WaitForSeconds(4f);
             FinishShowingAnimal();
             RestaurarJuego();

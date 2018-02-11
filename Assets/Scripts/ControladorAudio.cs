@@ -25,7 +25,7 @@ public class ControladorAudio : MonoBehaviour {
 
     public void StopSpeak()
     {
-        EasyTTSUtil.Stop();
+        EasyTTSUtil.StopSpeech();
     }
 
     void SearchObjects()

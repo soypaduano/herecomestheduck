@@ -106,8 +106,6 @@ public class OptionsPreferences : MonoBehaviour
 
     public void LanguageChanged()
     {
-        print(GetLanguage());
-        print(Constantes.languages.Count);
         int languageCounter = GetLanguage();
         if(languageCounter == Constantes.languages.Count - 1)
         {
@@ -225,10 +223,6 @@ public class OptionsPreferences : MonoBehaviour
             default:
                 break;
         }
-
-        print("UNA VEZ CAMBIAMOS EL SLIDER, EL VALOR DENTRO DE PLAYER PREFS ES...");
-        print(PlayerPrefs.GetFloat("GameDifficulty"));
-
     }
 
     void SetGameDifficulty(float _difficulty)

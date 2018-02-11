@@ -18,7 +18,7 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     InstructionsController instructionsController;
     ControladorAudio audioController;
 
-	// Use this for initialization
+
 	void Start () {
         panelInstrucciones.SetActive(false);
         panelControles.SetActive(false);
@@ -26,7 +26,6 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     }
 
 	
-	// Update is called once per frame
 	void Update () {
         if (isTouchingInstrucciones)
         {
@@ -80,12 +79,13 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 instructionsController.ReproducirInstrucciones();
             }  else
             {
-                audioController.Speak("Game Scene");
+                audioController.StopSpeak();
                 panelInstrucciones.SetActive(false);
                 botonControles.SetActive(true);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Instrucciones";
                 imageInstruction.sprite =  Resources.Load<Sprite>("info");
-                instructionsController.StopInstrucciones();
+                audioController.Speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
+
             }
         } else if(gameObject.name == "Controles")
         {
@@ -98,14 +98,12 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 imageControl.sprite = Resources.Load<Sprite>("close");
             } else
             {
-                audioController.Speak("Game Scene");
+                audioController.Speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
                 panelControles.SetActive(false);
                 botonInstrucciones.SetActive(true);
                 botonControles.GetComponentInChildren<Text>().text = "Controles";
                 imageControl.sprite = Resources.Load<Sprite>("settings");
             }
-            
         }
-
     }
 }
