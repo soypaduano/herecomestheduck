@@ -92,6 +92,7 @@
     <Compile Include="Assets\Scripts\ControladorAudio.cs" />
     <Compile Include="Assets\Scripts\ControladorJuego.cs" />
     <Compile Include="Assets\Scripts\InstructionsController.cs" />
+    <Compile Include="Assets\Scripts\Localizacion\LocalizationData.cs" />
     <Compile Include="Assets\Scripts\OptionsPreferences.cs" />
     <Compile Include="Assets\Scripts\UIController.cs" />
   </ItemGroup>
