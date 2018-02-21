@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 44407004}
   - component: {fileID: 44407003}
   m_Layer: 5
-  m_Name: VozActivada
+  m_Name: VoiceActivated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -829,7 +829,7 @@ GameObject:
   - component: {fileID: 445049137}
   - component: {fileID: 445049136}
   m_Layer: 5
-  m_Name: CambiarFuente
+  m_Name: ChangeFont
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1270,8 +1270,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.67166674, y: 0.17233118}
   m_AnchorMax: {x: 0.9666667, y: 0.83874846}
-  m_AnchoredPosition: {x: 124.86533, y: 85.58974}
-  m_SizeDelta: {x: 113.14498, y: 0}
+  m_AnchoredPosition: {x: 40, y: 86.4}
+  m_SizeDelta: {x: 33.59, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &505258591
 MonoBehaviour:
@@ -1538,7 +1538,7 @@ GameObject:
   - component: {fileID: 609364929}
   - component: {fileID: 609364928}
   m_Layer: 5
-  m_Name: InstruccionInvidente
+  m_Name: BlindInstruction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2838,8 +2838,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 355.6557, y: 85.79074}
-  m_SizeDelta: {x: 384.5, y: 151.906}
+  m_AnchoredPosition: {x: 4.2, y: 1.71}
+  m_SizeDelta: {x: 157.5, y: 66.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1022187809
 GameObject:
@@ -3505,7 +3505,7 @@ GameObject:
   - component: {fileID: 1171247474}
   - component: {fileID: 1171247473}
   m_Layer: 5
-  m_Name: Instrucciones
+  m_Name: LongInstructions
   m_TagString: TextInstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3653,6 +3653,46 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184098215}
+--- !u!1 &1224839768
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1224839770}
+  - component: {fileID: 1224839769}
+  m_Layer: 0
+  m_Name: LocalizationManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1224839769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1224839768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0593835c82c5c469c89e95200f9813, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1224839770
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1224839768}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1237324983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3757,7 +3797,7 @@ GameObject:
   - component: {fileID: 1338867370}
   - component: {fileID: 1338867369}
   m_Layer: 5
-  m_Name: Invidente
+  m_Name: BlindInstruction
   m_TagString: TextInstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3831,7 +3871,7 @@ GameObject:
   - component: {fileID: 1347484859}
   - component: {fileID: 1347484858}
   m_Layer: 5
-  m_Name: VozActivada
+  m_Name: AnimalSoundActivated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4311,7 +4351,7 @@ GameObject:
   - component: {fileID: 1471570434}
   - component: {fileID: 1471570433}
   m_Layer: 5
-  m_Name: Titulo
+  m_Name: TitleInInstructions
   m_TagString: TextInstrucciones
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4385,7 +4425,7 @@ GameObject:
   - component: {fileID: 1484382143}
   - component: {fileID: 1484382142}
   m_Layer: 5
-  m_Name: TextIdioma
+  m_Name: LanguageText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4582,7 +4622,7 @@ GameObject:
   - component: {fileID: 1537621810}
   - component: {fileID: 1537621809}
   m_Layer: 5
-  m_Name: Text
+  m_Name: RepeatInstructions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4913,7 +4953,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1573576448}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -355.1557, y: -85.289795, z: 12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1928690192}
@@ -5360,7 +5400,7 @@ GameObject:
   - component: {fileID: 1668574179}
   - component: {fileID: 1668574178}
   m_Layer: 5
-  m_Name: TextoInstrucciones
+  m_Name: ControlsButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5381,8 +5421,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.15147433}
   m_AnchorMax: {x: 0.60055554, y: 0.8387484}
-  m_AnchoredPosition: {x: 278.41266, y: 85.019165}
-  m_SizeDelta: {x: 230.01389, y: 105.06582}
+  m_AnchoredPosition: {x: -19.1, y: 0.3}
+  m_SizeDelta: {x: 87.48, y: 30.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1668574178
 MonoBehaviour:
@@ -5516,7 +5556,7 @@ GameObject:
   - component: {fileID: 1699939881}
   - component: {fileID: 1699939880}
   m_Layer: 5
-  m_Name: TextoInstruccion
+  m_Name: TextTitle
   m_TagString: TituloPantallaJuego
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5784,7 +5824,7 @@ GameObject:
   - component: {fileID: 1750024020}
   - component: {fileID: 1750024019}
   m_Layer: 5
-  m_Name: TextDefecto
+  m_Name: DefaultText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6008,7 +6048,7 @@ GameObject:
   - component: {fileID: 1805627102}
   - component: {fileID: 1805627101}
   m_Layer: 5
-  m_Name: Dificultad
+  m_Name: DifficultyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6029,8 +6069,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0325, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.946835}
-  m_AnchoredPosition: {x: -7.600006, y: 1.7000008}
-  m_SizeDelta: {x: 16, y: -2.2000008}
+  m_AnchoredPosition: {x: -4.1712, y: 1.7000008}
+  m_SizeDelta: {x: 9.1425, y: -2.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1805627101
 MonoBehaviour:
@@ -6263,7 +6303,7 @@ GameObject:
   - component: {fileID: 1911023734}
   - component: {fileID: 1911023733}
   m_Layer: 5
-  m_Name: TextoInstrucciones
+  m_Name: InstructionsButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6284,8 +6324,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.17233118}
   m_AnchorMax: {x: 0.6361112, y: 0.87000006}
-  m_AnchoredPosition: {x: -66.05148, y: 88.99341}
-  m_SizeDelta: {x: 244.60281, y: 103.999176}
+  m_AnchoredPosition: {x: -10.6, y: 85.5}
+  m_SizeDelta: {x: 84.63, y: 35.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1911023733
 MonoBehaviour:
@@ -6433,8 +6473,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.6444445, y: 0.15147433}
   m_AnchorMax: {x: 0.943295, y: 0.8387484}
-  m_AnchoredPosition: {x: 468.48553, y: 84.23396}
-  m_SizeDelta: {x: 115.44743, y: 0}
+  m_AnchoredPosition: {x: 55.9, y: 1.6}
+  m_SizeDelta: {x: 31.46, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1928690193
 MonoBehaviour:
@@ -6561,7 +6601,7 @@ GameObject:
   - component: {fileID: 2097205056}
   - component: {fileID: 2097205055}
   m_Layer: 5
-  m_Name: TextIdioma
+  m_Name: GameSpeedText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6580,10 +6620,10 @@ RectTransform:
   m_Father: {fileID: 1531168666}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.0325, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5594074}
   m_AnchorMax: {x: 1, y: 0.946835}
-  m_AnchoredPosition: {x: -7.600006, y: 1.7000008}
-  m_SizeDelta: {x: 16, y: -2.2000008}
+  m_AnchoredPosition: {x: 0.3288002, y: 0.20000076}
+  m_SizeDelta: {x: 0.14249992, y: 0.79999995}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2097205055
 MonoBehaviour:

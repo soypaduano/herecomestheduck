@@ -1,0 +1,68 @@
+{"items":[
+	{"key":"TextTitle","value":"Pantalla de juego"},
+  {
+    "key": "BlindInstruction",
+    "value": "Deja pulsado 5s para activar el modo invidente"
+  },
+  {
+    "key": "InstructionsButtonText",
+    "value": "Instrucciones"
+  },
+  {
+    "key": "ControlsButtonText",
+    "value": "Controles"
+  },
+  {
+    "key": "VoiceActivated",
+    "value": "Voz Activada"
+  },
+  {
+    "key": "ChangeFont",
+    "value": "Cambiar fuente"
+  },
+  {
+    "key": "AnimalSoundActivated",
+    "value": "Sonido de animales activado: "
+  },
+  {
+    "key": "LanguageText",
+    "value": "Idioma"
+  },
+  {
+    "key": "GameSpeedText",
+    "value": "Velocidad del juego: "
+  },
+  {
+    "key": "DifficultyText",
+    "value": "Dificultad: "
+  },
+  {
+    "key": "DefaultText",
+    "value": "Opciones por defecto"
+  },
+  {
+    "key": "TitleInInstructions",
+    "value": "Instrucciones"
+  },
+  {
+    "key": "LongInstructions",
+    "value": " Surprise Duck es un juego donde tendrás que pulsar en la pantalla y disfrutar del sonido de los animales hasta que salga el del pato. Si usted escucha el pato, habrá perdido. Si consigue escuchar los 16 animales sin escuchar al pato, habrá ganado."
+  },
+  {
+    "key": "RepeatInstructions",
+    "value": "Repetir instrucciones"
+  },
+  {
+    "key": "Close",
+    "value": "Cerrar"
+  },
+  {
+    "key": "Controls",
+    "value": "Controles"
+  }, 
+   {
+    "key": "Instructions",
+    "value": "Instrucciones"
+  }
+
+ ]}

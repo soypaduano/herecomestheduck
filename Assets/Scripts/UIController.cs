@@ -17,12 +17,14 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     GameObject botonInstrucciones, botonControles;
     InstructionsController instructionsController;
     ControladorAudio audioController;
+    LocalizationManager localizationManager;
 
 
 	void Start () {
         panelInstrucciones.SetActive(false);
         panelControles.SetActive(false);
         audioController = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
+        localizationManager = GameObject.Find("LocalizationManager").GetComponent<LocalizationManager>();
     }
 
 	
@@ -73,7 +75,7 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 audioController.Speak(gameObject.transform.GetComponentInChildren<Text>().text);
                 panelInstrucciones.SetActive(true);
                 botonControles.SetActive(false);
-                botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
+                botonInstrucciones.GetComponentInChildren<Text>().text = localizationManager.GetLocalizedValue("Close");
                 imageInstruction.sprite =  Resources.Load<Sprite>("close");
                 instructionsController = GameObject.Find("ControladorInstrucciones").GetComponent<InstructionsController>();
                 instructionsController.ReproducirInstrucciones();
@@ -82,7 +84,7 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 audioController.StopSpeak();
                 panelInstrucciones.SetActive(false);
                 botonControles.SetActive(true);
-                botonInstrucciones.GetComponentInChildren<Text>().text = "Instrucciones";
+                botonInstrucciones.GetComponentInChildren<Text>().text = localizationManager.GetLocalizedValue("Instructions");
                 imageInstruction.sprite =  Resources.Load<Sprite>("info");
                 audioController.Speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
 
@@ -94,14 +96,14 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
                 audioController.Speak(gameObject.transform.GetComponentInChildren<Text>().text);
                 panelControles.SetActive(true);
                 botonInstrucciones.SetActive(false);
-                botonControles.GetComponentInChildren<Text>().text = "Cerrar";
+                botonControles.GetComponentInChildren<Text>().text = localizationManager.GetLocalizedValue("Close");
                 imageControl.sprite = Resources.Load<Sprite>("close");
             } else
             {
                 audioController.Speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
                 panelControles.SetActive(false);
                 botonInstrucciones.SetActive(true);
-                botonControles.GetComponentInChildren<Text>().text = "Controles";
+                botonControles.GetComponentInChildren<Text>().text = localizationManager.GetLocalizedValue("Controls");
                 imageControl.sprite = Resources.Load<Sprite>("settings");
             }
         }

@@ -16,11 +16,20 @@ public class OptionsPreferences : MonoBehaviour
     Text speedGame, HumanVoiceActivated, AnimalVoiceActivated, difficultyText;
     Text[] allTexts;
 
+    LocalizationManager localizationManager;
 
 
     void Awake()
     {
         allTexts = GameObject.FindObjectsOfType<Text>();
+        print(allTexts.Length);
+    }
+
+    void Start()
+    {
+
+        localizationManager = GameObject.Find("LocalizationManager").GetComponent<LocalizationManager>();
+
         if (PlayerPrefs.GetInt("FirstTime") == 0)
         {
             DefaultOptions();
@@ -33,12 +42,12 @@ public class OptionsPreferences : MonoBehaviour
 
     void DefaultOptions()
     {
-        SetLanguage(0);
         SetVoiceActivated(1);
         SetAnimalSoundsActivated(1);
         SetUserFont(0);
         SetGameSpeed(2);
         SetGameDifficulty(1);
+        SetLanguage(0);
     }
 
     //Human Voice 
@@ -96,12 +105,27 @@ public class OptionsPreferences : MonoBehaviour
             languageText.text = "Idioma: Español";
             flag.sprite = Resources.Load<Sprite>("spanish_flag");
             GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(0);
+            localizationManager.LoadLocalizedText("localizedText_es.json");
+            print("Antes de traducir..." + allTexts.Length);
+            TranslateAllTexts();
         } else if(GetLanguage() == 1)
         {
             languageText.text = "Language: English";
             flag.sprite = Resources.Load<Sprite>("english_flag");
             GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(1);
+            localizationManager.LoadLocalizedText("localizedText_en.json");
+            TranslateAllTexts();
         }
+    }
+
+    void TranslateAllTexts()
+    {
+        for (int i = 0; i < allTexts.Length; i++)
+        {
+
+            allTexts[i].text = localizationManager.GetLocalizedValue(allTexts[i].gameObject.name);
+        }
+
     }
 
     public void LanguageChanged()
@@ -141,8 +165,6 @@ public class OptionsPreferences : MonoBehaviour
 
     void SetFontToLabels()
     {
-
-        
         for (int i = 0; i < allTexts.Length; i++)
         {
             allTexts[i].font = fuentes[fontCounter];
@@ -307,9 +329,9 @@ public class OptionsPreferences : MonoBehaviour
         fontCounter = GetUserFont();
         SetFontToLabels();
         checkAnimalSoundsActivated();
-        checkCurrentLanguage();
         SetGameSpeedToSlider();
         SetDifficultyToSlider();
+        checkCurrentLanguage();
     }
 }
 
