@@ -14,7 +14,7 @@
   },
   {
     "key": "VoiceActivated",
-    "value": "Voz Activada"
+    "value": "Voz Activada: "
   },
   {
     "key": "ChangeFont",
@@ -60,9 +60,28 @@
     "key": "Controls",
     "value": "Controles"
   }, 
-   {
+  {
     "key": "Instructions",
     "value": "Instrucciones"
+  },
+  {
+    "key": "Easy",
+    "value": "Facil"
+  },
+  {
+    "key": "Medium",
+    "value": "Medio"
+  },
+   {
+    "key": "Hard",
+    "value": "Dificil"
+  },
+   {
+    "key": "NoDuck",
+    "value": "Sin pato"
+  },
+  {
+    "key": "Yes",
+    "value": "Si"
   }
-
  ]}

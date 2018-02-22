@@ -1,0 +1,88 @@
+{"items":[
+	{"key":"TextTitle","value":"Game Screen"},
+  {
+    "key": "BlindInstruction",
+    "value": "Press for 5 seconds to activate blind mode"
+  },
+  {
+    "key": "InstructionsButtonText",
+    "value": "Instructions"
+  },
+  {
+    "key": "ControlsButtonText",
+    "value": "Controls"
+  },
+  {
+    "key": "VoiceActivated",
+    "value": "Voice Activated: "
+  },
+  {
+    "key": "ChangeFont",
+    "value": "Change Font"
+  },
+  {
+    "key": "AnimalSoundActivated",
+    "value": "Animal sound activated: "
+  },
+  {
+    "key": "LanguageText",
+    "value": "Language"
+  },
+  {
+    "key": "GameSpeedText",
+    "value": "Game speed: "
+  },
+  {
+    "key": "DifficultyText",
+    "value": "Difficulty: "
+  },
+  {
+    "key": "DefaultText",
+    "value": "Default options"
+  },
+  {
+    "key": "TitleInInstructions",
+    "value": "Instructions"
+  },
+  {
+    "key": "LongInstructions",
+    "value": "Surprise Duck it's a game where you will have to touch the screen and enjoy the sound of the animals untill the duck sound appears. If you listen to the duck, you will have lost. If you listen to the 16 animals without listening to the duck, you will have won."
+  },
+  {
+    "key": "RepeatInstructions",
+    "value": "Repeat instructions"
+  },
+  {
+    "key": "Close",
+    "value": "Close"
+  },
+  {
+    "key": "Controls",
+    "value": "Controls"
+  }, 
+   {
+    "key": "Instructions",
+    "value": "Instructions"
+  },
+  {
+    "key": "Easy",
+    "value": "Easy"
+  },
+  {
+    "key": "Medium",
+    "value": "Medium"
+  },
+   {
+    "key": "Hard",
+    "value": "Hard"
+  },
+   {
+    "key": "NoDuck",
+    "value": "No Duck"
+  }, 
+   {
+    "key": "Yes",
+    "value": "Yes"
+  }
+
+ ]}

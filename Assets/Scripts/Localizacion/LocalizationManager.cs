@@ -7,11 +7,13 @@ public class LocalizationManager : MonoBehaviour {
 
     Dictionary<string, string> localizedText;
     string missingText = "No value found";
+    bool dataOnDict;
 
     //Ojo con este metodo, puede pasar que tarde en cargar todo el JSON, por tanto deberiamos poner un bool
     //de Is True, es decir, el json ha sido leido y cargado en el dict.
     public void LoadLocalizedText(string fileName)
     {
+        dataOnDict = false;
         localizedText = new Dictionary<string, string>();
         string filePath = Path.Combine(Application.streamingAssetsPath, fileName);
         if (File.Exists(filePath))
@@ -25,8 +27,7 @@ public class LocalizationManager : MonoBehaviour {
                 localizedText.Add(loadedData.items[i].key, loadedData.items[i].value);
             }
 
-            print("data loaded");
-            print(localizedText.Count);
+            dataOnDict = true;
 
         } else
             print("file path / name couldnt be found");
@@ -34,10 +35,19 @@ public class LocalizationManager : MonoBehaviour {
 
     public string GetLocalizedValue(string _key)
     {
-        string result = missingText;
-        if (localizedText.ContainsKey(_key))
-            result = localizedText[_key];
-        return result;
+        if (dataOnDict)
+        {
+            string result = missingText;
+            if (localizedText.ContainsKey(_key))
+                result = localizedText[_key];
+
+            return result;
+        } else
+        {
+            print("Data not loaded yet");
+            return "perras";
+        }
+
     }
 }
 

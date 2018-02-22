@@ -22,7 +22,6 @@ public class OptionsPreferences : MonoBehaviour
     void Awake()
     {
         allTexts = GameObject.FindObjectsOfType<Text>();
-        print(allTexts.Length);
     }
 
     void Start()
@@ -46,7 +45,7 @@ public class OptionsPreferences : MonoBehaviour
         SetAnimalSoundsActivated(1);
         SetUserFont(0);
         SetGameSpeed(2);
-        SetGameDifficulty(1);
+        //SetGameDifficulty(1);
         SetLanguage(0);
     }
 
@@ -54,9 +53,10 @@ public class OptionsPreferences : MonoBehaviour
     void checkVoiceActivated()
     {
         if (PlayerPrefs.GetInt("VoiceActivated") == 1)
-            HumanVoiceActivated.text = "Voz humana: Sí";
+            HumanVoiceActivated.text = localizationManager.GetLocalizedValue(HumanVoiceActivated.gameObject.name) + localizationManager.GetLocalizedValue("Yes");
         else
-            HumanVoiceActivated.text = "Voz humana: No";
+            HumanVoiceActivated.text = localizationManager.GetLocalizedValue(HumanVoiceActivated.gameObject.name) + "No";
+        
     }
 
     public void VoiceHasBeenChanged()
@@ -78,9 +78,9 @@ public class OptionsPreferences : MonoBehaviour
     void checkAnimalSoundsActivated()
     {
         if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 1)
-            AnimalVoiceActivated.text = "Sonido de animales: Sí";
+            AnimalVoiceActivated.text = localizationManager.GetLocalizedValue(AnimalVoiceActivated.gameObject.name) + localizationManager.GetLocalizedValue("Yes");
         else
-            AnimalVoiceActivated.text = "Sonido de animales: No";
+            AnimalVoiceActivated.text = localizationManager.GetLocalizedValue(AnimalVoiceActivated.gameObject.name) + "No";
     }
 
     public void AnimalSoundHasBeenChanged()
@@ -106,7 +106,6 @@ public class OptionsPreferences : MonoBehaviour
             flag.sprite = Resources.Load<Sprite>("spanish_flag");
             GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(0);
             localizationManager.LoadLocalizedText("localizedText_es.json");
-            print("Antes de traducir..." + allTexts.Length);
             TranslateAllTexts();
         } else if(GetLanguage() == 1)
         {
@@ -188,7 +187,7 @@ public class OptionsPreferences : MonoBehaviour
     //SPEED SLIDER
     public void SliderValueChanged()
     {
-        speedGame.text = "Velocidad de juego: " + sliderSpeed.value;
+        speedGame.text = localizationManager.GetLocalizedValue(speedGame.gameObject.name) + sliderSpeed.value;
         SetGameSpeed(sliderSpeed.value);
     }
 
@@ -205,7 +204,7 @@ public class OptionsPreferences : MonoBehaviour
     void SetGameSpeedToSlider()
     {
         sliderSpeed.value = getGameSpeed();
-        speedGame.text = "Velocidad de juego: " + sliderSpeed.value;
+        speedGame.text = localizationManager.GetLocalizedValue(speedGame.gameObject.name) + sliderSpeed.value;
     }
 
     public void ChangeSpeedButton()
@@ -222,24 +221,24 @@ public class OptionsPreferences : MonoBehaviour
     }
 
     //GAME DIFFICULTY
-    public void SliderDifficultyChanged()
+   public void SliderDifficultyChanged()
     {
-        switch ((int)sliderDifficulty.value)
+       switch ((int)sliderDifficulty.value)
         {
             case 0:
-                difficultyText.text = "Dificultad: sin Pato";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("NoDuck");
                 SetGameDifficulty(0);
                 break;
             case 1:
-                difficultyText.text = "Dificultad: fácil";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Easy");
                 SetGameDifficulty(1);
                 break;
             case 2:
-                difficultyText.text = "Dificultad: medio";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Medium");
                 SetGameDifficulty(2);
                 break;
             case 3:
-                difficultyText.text = "Dificultad: dificil";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Hard");
                 SetGameDifficulty(3);
                 break;
             default:
@@ -247,7 +246,7 @@ public class OptionsPreferences : MonoBehaviour
         }
     }
 
-    void SetGameDifficulty(float _difficulty)
+   void SetGameDifficulty(float _difficulty)
     {
         PlayerPrefs.SetFloat("GameDifficulty", _difficulty);
     }
@@ -285,16 +284,16 @@ public class OptionsPreferences : MonoBehaviour
         switch ((int)sliderDifficulty.value)
         {
             case 0:
-                difficultyText.text = "Dificultad: sin Pato";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("NoDuck");
                 break;
             case 1:
-                difficultyText.text = "Dificultad: fácil";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Easy");
                 break;
             case 2:
-                difficultyText.text = "Dificultad: medio";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Medium");
                 break;
             case 3:
-                difficultyText.text = "Dificultad: dificil";
+                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Hard");
                 break;
             default:
                 break;
@@ -325,13 +324,14 @@ public class OptionsPreferences : MonoBehaviour
 
     void CheckAllOptions()
     {
+        checkCurrentLanguage();
         checkVoiceActivated();
         fontCounter = GetUserFont();
         SetFontToLabels();
         checkAnimalSoundsActivated();
         SetGameSpeedToSlider();
         SetDifficultyToSlider();
-        checkCurrentLanguage();
+        
     }
 }
 
