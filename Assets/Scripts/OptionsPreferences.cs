@@ -106,15 +106,16 @@ public class OptionsPreferences : MonoBehaviour
             flag.sprite = Resources.Load<Sprite>("spanish_flag");
             GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(0);
             localizationManager.LoadLocalizedText("localizedText_es.json");
-            TranslateAllTexts();
         } else if(GetLanguage() == 1)
         {
             languageText.text = "Language: English";
             flag.sprite = Resources.Load<Sprite>("english_flag");
             GameObject.Find("AudioController").GetComponent<ControladorAudio>().ChangeLanguage(1);
             localizationManager.LoadLocalizedText("localizedText_en.json");
-            TranslateAllTexts();
         }
+
+        TranslateAllTexts();
+        CheckAllOptionsAfterLanguage();
     }
 
     void TranslateAllTexts()
@@ -332,6 +333,14 @@ public class OptionsPreferences : MonoBehaviour
         SetGameSpeedToSlider();
         SetDifficultyToSlider();
         
+    }
+
+    public void CheckAllOptionsAfterLanguage()
+    {
+        checkVoiceActivated();
+        checkAnimalSoundsActivated();
+        SetGameSpeedToSlider();
+        SetDifficultyToSlider();
     }
 }
 
