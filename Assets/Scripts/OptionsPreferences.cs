@@ -16,7 +16,6 @@ public class OptionsPreferences : MonoBehaviour
     Text speedGame, HumanVoiceActivated, AnimalVoiceActivated, difficultyText;
     Text[] allTexts;
 
-    LocalizationManager localizationManager;
 
 
     void Awake()
@@ -26,8 +25,6 @@ public class OptionsPreferences : MonoBehaviour
 
     void Start()
     {
-
-        localizationManager = GameObject.Find("LocalizationManager").GetComponent<LocalizationManager>();
 
         if (PlayerPrefs.GetInt("FirstTime") == 0)
         {
@@ -46,17 +43,17 @@ public class OptionsPreferences : MonoBehaviour
         SetUserFont(0);
         SetGameSpeed(2);
         //SetGameDifficulty(1);
-        SetLanguage(0);
+        //SetLanguage(0);
     }
 
     //Human Voice 
     void checkVoiceActivated()
     {
         if (PlayerPrefs.GetInt("VoiceActivated") == 1)
-            HumanVoiceActivated.text = localizationManager.GetLocalizedValue(HumanVoiceActivated.gameObject.name) + localizationManager.GetLocalizedValue("Yes");
+            HumanVoiceActivated.text = "Voz Activada: Sí";
         else
-            HumanVoiceActivated.text = localizationManager.GetLocalizedValue(HumanVoiceActivated.gameObject.name) + "No";
-        
+            HumanVoiceActivated.text = "Voz Activada: No";
+
     }
 
     public void VoiceHasBeenChanged()
@@ -78,9 +75,9 @@ public class OptionsPreferences : MonoBehaviour
     void checkAnimalSoundsActivated()
     {
         if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 1)
-            AnimalVoiceActivated.text = localizationManager.GetLocalizedValue(AnimalVoiceActivated.gameObject.name) + localizationManager.GetLocalizedValue("Yes");
+            AnimalVoiceActivated.text = "Voz de animal: Sí";
         else
-            AnimalVoiceActivated.text = localizationManager.GetLocalizedValue(AnimalVoiceActivated.gameObject.name) + "No";
+            AnimalVoiceActivated.text = "Voz de animal: No";
     }
 
     public void AnimalSoundHasBeenChanged()
@@ -99,7 +96,7 @@ public class OptionsPreferences : MonoBehaviour
     }
 
     //Language
-    void checkCurrentLanguage()
+  /*  void checkCurrentLanguage()
     {
         if(GetLanguage() == 0){
             languageText.text = "Idioma: Español";
@@ -150,7 +147,7 @@ public class OptionsPreferences : MonoBehaviour
     void SetLanguage(int _language)
     {
         PlayerPrefs.SetInt("Language", _language);
-    }
+    }*/
 
     //FONTS
     void SetUserFont(int _fuente)
@@ -188,7 +185,7 @@ public class OptionsPreferences : MonoBehaviour
     //SPEED SLIDER
     public void SliderValueChanged()
     {
-        speedGame.text = localizationManager.GetLocalizedValue(speedGame.gameObject.name) + sliderSpeed.value;
+        speedGame.text = "Velocidad: " + sliderSpeed.value;
         SetGameSpeed(sliderSpeed.value);
     }
 
@@ -205,7 +202,7 @@ public class OptionsPreferences : MonoBehaviour
     void SetGameSpeedToSlider()
     {
         sliderSpeed.value = getGameSpeed();
-        speedGame.text = localizationManager.GetLocalizedValue(speedGame.gameObject.name) + sliderSpeed.value;
+        speedGame.text = "Velocidad: " + sliderSpeed.value;
     }
 
     public void ChangeSpeedButton()
@@ -227,19 +224,19 @@ public class OptionsPreferences : MonoBehaviour
        switch ((int)sliderDifficulty.value)
         {
             case 0:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("NoDuck");
+                difficultyText.text = "Dificultad: sin pato";
                 SetGameDifficulty(0);
                 break;
             case 1:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Easy");
+                difficultyText.text = "Dificultad: facil";
                 SetGameDifficulty(1);
                 break;
             case 2:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Medium");
+                difficultyText.text = "Dificultad: mediano";
                 SetGameDifficulty(2);
                 break;
             case 3:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Hard");
+                difficultyText.text = "Dificultad: dificil";
                 SetGameDifficulty(3);
                 break;
             default:
@@ -285,16 +282,20 @@ public class OptionsPreferences : MonoBehaviour
         switch ((int)sliderDifficulty.value)
         {
             case 0:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("NoDuck");
+                difficultyText.text = "Dificultad: sin pato";
+                SetGameDifficulty(0);
                 break;
             case 1:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Easy");
+                difficultyText.text = "Dificultad: facil";
+                SetGameDifficulty(1);
                 break;
             case 2:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Medium");
+                difficultyText.text = "Dificultad: mediano";
+                SetGameDifficulty(2);
                 break;
             case 3:
-                difficultyText.text = localizationManager.GetLocalizedValue(difficultyText.gameObject.name) + localizationManager.GetLocalizedValue("Hard");
+                difficultyText.text = "Dificultad: dificil";
+                SetGameDifficulty(3);
                 break;
             default:
                 break;
@@ -325,7 +326,6 @@ public class OptionsPreferences : MonoBehaviour
 
     void CheckAllOptions()
     {
-        checkCurrentLanguage();
         checkVoiceActivated();
         fontCounter = GetUserFont();
         SetFontToLabels();

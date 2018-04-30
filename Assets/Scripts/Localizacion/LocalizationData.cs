@@ -1,1 +1,0 @@
-﻿//r los datos desde un archivo JSON, cargarlo dentro de un objeto de Localization item y luego cada objeto meterlo en un array de items los cuales vamos a usar para rellenar nuestro diccionario*/

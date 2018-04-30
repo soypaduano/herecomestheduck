@@ -75,7 +75,7 @@ public class ControladorJuego : MonoBehaviour
             } while (Constantes.checkIfRandomInsideArray(usedValues, numeroRandom));
 
             usedValues.Add(numeroRandom);
-            if(optionsContoller.GetLanguage() == 0)
+            if(PlayerPrefs.GetInt("Language") == 0)
                 animalList.Add(new Animal(Constantes.animales[numeroRandom], Constantes.soundAnimals[numeroRandom]));
             else
                 animalList.Add(new Animal(Constantes.animales_Ingles[numeroRandom], Constantes.soundAnimals[numeroRandom]));
