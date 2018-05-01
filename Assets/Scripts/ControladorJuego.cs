@@ -34,8 +34,8 @@ public class ControladorJuego : MonoBehaviour
 
     void Start()
     {
-        SearchObjects();
-        FillArray();
+        searchObjects();
+        fillArray();
         timeOfImagePanel = optionsContoller.getGameSpeed();
         //TODO: Falta testear esto!
         /*if (PlayerPrefs.GetInt("FirstTime") == 0)
@@ -50,13 +50,13 @@ public class ControladorJuego : MonoBehaviour
         }*/
     }
 
-    void FillArray()
+    void fillArray()
     {
         int totalAnimals = 16;
-        if (optionsContoller.GetGameDifficulty() != 0)
+        if (optionsContoller.getGameDifficulty() != 0)
         {
             totalAnimals = 15;
-            int posibilidadPato = Random.Range(0, (int)optionsContoller.GetGameDifficulty());
+            int posibilidadPato = Random.Range(0, (int)optionsContoller.getGameDifficulty());
             
             if (posibilidadPato == 0)
                 animalList.Add(new Animal("pato", "cuac cuac!"));
@@ -83,7 +83,7 @@ public class ControladorJuego : MonoBehaviour
     }
     
 
-    void SearchObjects()
+    void searchObjects()
     {
         optionsContoller = GameObject.Find("GamePreferences").GetComponent<OptionsPreferences>();
         popUpNewAnimal = GameObject.Find("PopUpAnimalNuevo");
@@ -91,13 +91,13 @@ public class ControladorJuego : MonoBehaviour
         audioController = GameObject.Find("AudioController").GetComponent<ControladorAudio>();
         soundOfAnimal = GameObject.Find("TextoSonidoAnimal").GetComponent<Text>();
         imageOfAnimalPopUp = GameObject.Find("ImagePopUpAnimal").GetComponent<Image>();
-        ShowHidePopUp(false);
+        showHidePopUp(false);
         imagesAnimals = GameObject.FindGameObjectsWithTag("Imagen");
         instruction = GameObject.Find("Instruccion");
-        OcultarImagenes();
+        ocultarImagenes();
     }
 
-    void OcultarImagenes()
+    void ocultarImagenes()
     {
         foreach (GameObject imagen in imagesAnimals)
         {
@@ -105,42 +105,48 @@ public class ControladorJuego : MonoBehaviour
         }
     }
 
-    void ShowHidePopUp(bool _bool)
+    void showHidePopUp(bool _bool)
     {
         popUpNewAnimal.SetActive(_bool);
         popUpNewAnimal.transform.parent.gameObject.SetActive(_bool); //Ocultamos a su padre, que es el fondo negro
     }
 
-    void FinishShowingAnimal()
+    void finishShowingAnimal()
     {
         timeOfImagePanel = optionsContoller.getGameSpeed();
-        ShowHidePopUp(false);
-        audioController.StopSound();
+        showHidePopUp(false);
+        audioController.stopSound();
     }
 
-    void RestaurarJuego()
+    void restaurarJuego()
     {
         instruction.SetActive(true);
         gameOver = false;
-        OcultarImagenes();
+        ocultarImagenes();
         contadorAnimales = 0;
         animalList.Clear();
-        FillArray();
+        fillArray();
     }
 
-    public void TouchScreen()
+    public void volverAJugar()
+    {
+        print("Executing volver a jugar");
+        restaurarJuego();
+    }
+
+    public void touchScreen()
     {
         if (!gameOver)
         {
             instruction.SetActive(false);
             int numeroRandom = Random.Range(0, animalList.Count);
             Animal animal = animalList[numeroRandom];
-            StartCoroutine(ShowAnimalCorutine(animal, numeroRandom));
+            StartCoroutine(showAnimalCourutine(animal, numeroRandom));
             contadorAnimales++;
         }   
     }
 
-    void SetImage(string nombreAnimal)
+    void setImage(string nombreAnimal)
     {
         //CUADRICULA
         imagesAnimals[contadorAnimales].SetActive(true);
@@ -151,46 +157,54 @@ public class ControladorJuego : MonoBehaviour
     }
 
 
-    IEnumerator ShowAnimalCorutine(Animal _animal, int _randomNumber)
+    IEnumerator showAnimalCourutine(Animal _animal, int _randomNumber)
     {
 
-        SetImage(_animal.name);
-        ShowHidePopUp(true);
+        string nombreAcento = "Ratón";
+        string formattedStringAnimal = nombreAcento;
+        byte[] tempBytes;
+        tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(formattedStringAnimal);
+        string stringAsci = System.Text.Encoding.UTF8.GetString(tempBytes);
+
+        print(stringAsci);
+
+        setImage(_animal.name);
+        showHidePopUp(true);
         nameOfAnimal.text = Constantes.FirstLetterToUpper(_animal.name);
         soundOfAnimal.text = "Sonido: " + _animal.sound + "!";
-        audioController.Speak(_animal.name);
-        audioController.PlaySound(_animal.name);
+        audioController.speak(_animal.name);
+        audioController.playSounds(_animal.name);
         animalList.RemoveAt(_randomNumber);
 
         yield return new WaitForSeconds(optionsContoller.getGameSpeed());
-        FinishShowingAnimal();
+        finishShowingAnimal();
 
         if(_animal.name == "pato")
         {
             gameOver = true;
             yield return new WaitForSeconds(1f);
-            ShowHidePopUp(true);
+            showHidePopUp(true);
             nameOfAnimal.text = "¡Vuelve a intentarlo!";
             soundOfAnimal.text = "";
             imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("animo");
             yield return new WaitForSeconds(4f);
-            FinishShowingAnimal();
-            RestaurarJuego();
+            finishShowingAnimal();
+            restaurarJuego();
         }
       
         if (contadorAnimales == 16)
         {
             gameOver = true;
             yield return new WaitForSeconds(1f);
-            ShowHidePopUp(true); 
+            showHidePopUp(true); 
             nameOfAnimal.text = "¡Has ganado!";
             soundOfAnimal.text = "Enhorabuena";
-            audioController.Speak("Enhorabuena");
-            audioController.PlaySound("aplausos");
+            audioController.speak("Enhorabuena");
+            audioController.playSounds("aplausos");
             imageOfAnimalPopUp.sprite = Resources.Load<Sprite>("gana");
             yield return new WaitForSeconds(4f);
-            FinishShowingAnimal();
-            RestaurarJuego();
+            finishShowingAnimal();
+            restaurarJuego();
         }
     }
 }

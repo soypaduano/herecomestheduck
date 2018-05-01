@@ -70,35 +70,35 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         {
             if (botonControles.activeInHierarchy)
             {
-                audioController.Speak(gameObject.transform.GetComponentInChildren<Text>().text);
+                audioController.speak(gameObject.transform.GetComponentInChildren<Text>().text);
                 panelInstrucciones.SetActive(true);
                 botonControles.SetActive(false);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Cerrar";
                 imageInstruction.sprite =  Resources.Load<Sprite>("close");
                 instructionsController = GameObject.Find("ControladorInstrucciones").GetComponent<InstructionsController>();
-                instructionsController.ReproducirInstrucciones();
+                instructionsController.reproducirInstrucciones();
             }  else
             {
-                audioController.StopSpeak();
+                audioController.stopSpeak();
                 panelInstrucciones.SetActive(false);
                 botonControles.SetActive(true);
                 botonInstrucciones.GetComponentInChildren<Text>().text = "Instrucciones";
                 imageInstruction.sprite =  Resources.Load<Sprite>("info");
-                audioController.Speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
+                audioController.speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
 
             }
         } else if(gameObject.name == "Controles")
         {
             if (botonInstrucciones.activeInHierarchy)
             {
-                audioController.Speak(gameObject.transform.GetComponentInChildren<Text>().text);
+                audioController.speak(gameObject.transform.GetComponentInChildren<Text>().text);
                 panelControles.SetActive(true);
                 botonInstrucciones.SetActive(false);
                 botonControles.GetComponentInChildren<Text>().text = "Cerrar";
                 imageControl.sprite = Resources.Load<Sprite>("close");
             } else
             {
-                audioController.Speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
+                audioController.speak(GameObject.FindGameObjectWithTag("TituloPantallaJuego").GetComponent<Text>().text);
                 panelControles.SetActive(false);
                 botonInstrucciones.SetActive(true);
                 botonControles.GetComponentInChildren<Text>().text = "Controles";

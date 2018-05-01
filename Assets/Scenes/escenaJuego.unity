@@ -562,7 +562,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1158931308}
-          m_MethodName: TouchScreen
+          m_MethodName: touchScreen
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1192,7 +1192,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: ChangeDifficultyButton
+        m_MethodName: changeDifficultyButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1514,7 +1514,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: VoiceHasBeenChanged
+        m_MethodName: voiceHasBeenChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1559,8 +1559,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.081, y: 0}
   m_AnchorMax: {x: 0.9110001, y: 0.61375314}
-  m_AnchoredPosition: {x: 3.5, y: -0.40000153}
-  m_SizeDelta: {x: 10.7, y: -1.4000015}
+  m_AnchoredPosition: {x: 3.5, y: -6.19}
+  m_SizeDelta: {x: 10.7, y: -12.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &609364928
 MonoBehaviour:
@@ -1795,6 +1795,7 @@ GameObject:
   - component: {fileID: 679558275}
   - component: {fileID: 679558277}
   - component: {fileID: 679558276}
+  - component: {fileID: 679558278}
   m_Layer: 5
   m_Name: PanelInstruccion
   m_TagString: Untagged
@@ -1855,6 +1856,36 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 679558274}
+--- !u!114 &679558278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 679558274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1158931308}
+          m_MethodName: volverAJugar
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &693092292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2001,7 +2032,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 66986797}
-        m_MethodName: ReproducirInstrucciones
+        m_MethodName: reproducirInstrucciones
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3146,7 +3177,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: DefaultOptionsButton
+        m_MethodName: defaultOptionsButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3242,7 +3273,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: SliderDifficultyChanged
+        m_MethodName: sliderDifficultyChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3653,46 +3684,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1184098215}
---- !u!1 &1224839768
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1224839770}
-  - component: {fileID: 1224839769}
-  m_Layer: 0
-  m_Name: LocalizationManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1224839769
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1224839768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee0593835c82c5c469c89e95200f9813, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &1224839770
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1224839768}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1237324983
 GameObject:
   m_ObjectHideFlags: 0
@@ -3968,7 +3959,7 @@ RectTransform:
   m_AnchorMin: {x: 0.64900005, y: 0.16459674}
   m_AnchorMax: {x: 0.9385337, y: 0.84959674}
   m_AnchoredPosition: {x: -0.30000305, y: -1}
-  m_SizeDelta: {x: 0, y: 4}
+  m_SizeDelta: {x: -0.15358275, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1352055100
 MonoBehaviour:
@@ -4129,7 +4120,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: AnimalSoundHasBeenChanged
+        m_MethodName: animalSoundHasBeenChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4566,7 +4557,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: ChangeSpeedButton
+        m_MethodName: changeSpeedButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4830,7 +4821,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: SliderValueChanged
+        m_MethodName: sliderValueChanged
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5575,10 +5566,10 @@ RectTransform:
   m_Father: {fileID: 679558275}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.081, y: 0.61375314}
-  m_AnchorMax: {x: 0.92100006, y: 1}
-  m_AnchoredPosition: {x: -0.5000057, y: -0.79999924}
-  m_SizeDelta: {x: 2.6999998, y: 1}
+  m_AnchorMin: {x: 0, y: 0.38200003}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0.17998028, y: 1.5099983}
+  m_SizeDelta: {x: 0.20000076, y: -3.62}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1699939880
 MonoBehaviour:
@@ -5612,7 +5603,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pantalla de juego
+  m_Text: "Pantalla de juego. Pulse aqu\xED para volver a jugar"
 --- !u!222 &1699939881
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5729,7 +5720,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 822613634}
-        m_MethodName: ChangeFontButton
+        m_MethodName: changeFontButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5757,7 +5748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1749968434
 RectTransform:
   m_ObjectHideFlags: 0

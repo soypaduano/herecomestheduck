@@ -15,12 +15,12 @@ public class InstructionsController : MonoBehaviour {
 	}
     
       
-    public void ReproducirInstrucciones()
+    public void reproducirInstrucciones()
     {
         foreach (GameObject txt in allTexts)
         {
             string instruccion = txt.GetComponent<Text>().text;
-            audioController.Speak(instruccion);
+            audioController.speak(instruccion);
         }
     }
 }

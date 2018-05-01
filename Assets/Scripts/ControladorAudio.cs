@@ -7,12 +7,12 @@ public class ControladorAudio : MonoBehaviour {
 
 	void Start () {
         optionsController = GameObject.Find("GamePreferences").GetComponent<OptionsPreferences>();
-        SearchObjects();
+        searchObjects();
         EasyTTSUtil.Initialize(EasyTTSUtil.Spain);
     }
 	
 
-    public void ChangeLanguage(int value) {
+    public void changeLanguage(int value) {
         if (value == 0)
         {
             EasyTTSUtil.Initialize(EasyTTSUtil.Spain);
@@ -23,18 +23,18 @@ public class ControladorAudio : MonoBehaviour {
         }
     }
 
-    public void StopSpeak()
+    public void stopSpeak()
     {
         EasyTTSUtil.StopSpeech();
     }
 
-    void SearchObjects()
+    void searchObjects()
     {
         audioSource = gameObject.GetComponent<AudioSource>();
     }
 
     
-    public void PlaySound(string _name)
+    public void playSounds(string _name)
     {
         if(PlayerPrefs.GetInt("AnimalVoiceActivated")  == 1)
         {
@@ -43,12 +43,12 @@ public class ControladorAudio : MonoBehaviour {
         }
     }
 
-    public void StopSound()
+    public void stopSound()
     {
         audioSource.Stop();
     }
 
-    public void Speak(string _word)
+    public void speak(string _word)
     {
         if(PlayerPrefs.GetInt("VoiceActivated") == 1)
             EasyTTSUtil.SpeechAdd(_word);

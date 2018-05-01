@@ -32,16 +32,16 @@ public class OptionsPreferences : MonoBehaviour
             PlayerPrefs.SetInt("FirstTime", 1);
         }
         else
-            CheckAllOptions();
+            checkAllOptions();
 
     }
 
     void DefaultOptions()
     {
-        SetVoiceActivated(1);
-        SetAnimalSoundsActivated(1);
-        SetUserFont(0);
-        SetGameSpeed(2);
+        setVoiceActivated(1);
+        setAnimalSoundsActivated(1);
+        setUserFont(0);
+        setGameSpeed(2);
         //SetGameDifficulty(1);
         //SetLanguage(0);
     }
@@ -56,17 +56,17 @@ public class OptionsPreferences : MonoBehaviour
 
     }
 
-    public void VoiceHasBeenChanged()
+    public void voiceHasBeenChanged()
     {
         if (PlayerPrefs.GetInt("VoiceActivated") == 1)
-            SetVoiceActivated(0);
+            setVoiceActivated(0);
         else
-            SetVoiceActivated(1);
+            setVoiceActivated(1);
 
         checkVoiceActivated();
     }
 
-    public void SetVoiceActivated(int _voice)
+    public void setVoiceActivated(int _voice)
     {
         PlayerPrefs.SetInt("VoiceActivated", _voice);
     }
@@ -80,17 +80,17 @@ public class OptionsPreferences : MonoBehaviour
             AnimalVoiceActivated.text = "Voz de animal: No";
     }
 
-    public void AnimalSoundHasBeenChanged()
+    public void animalSoundHasBeenChanged()
     {
         if (PlayerPrefs.GetInt("AnimalVoiceActivated") == 0) {
-            SetAnimalSoundsActivated(1);
+            setAnimalSoundsActivated(1);
         } else
-            SetAnimalSoundsActivated(0);
+            setAnimalSoundsActivated(0);
 
         checkAnimalSoundsActivated();
     }
 
-    public void SetAnimalSoundsActivated(int _animal)
+    public void setAnimalSoundsActivated(int _animal)
     {
         PlayerPrefs.SetInt("AnimalVoiceActivated", _animal);
     }
@@ -150,26 +150,26 @@ public class OptionsPreferences : MonoBehaviour
     }*/
 
     //FONTS
-    void SetUserFont(int _fuente)
+    void setUserFont(int _fuente)
     {
         PlayerPrefs.SetInt("Font", _fuente);
     }
 
-    int GetUserFont()
+    int getUserFont()
     {
         return PlayerPrefs.GetInt("Font");
     }
 
-    void SetFontToLabels()
+    void setFontToLabels()
     {
         for (int i = 0; i < allTexts.Length; i++)
         {
             allTexts[i].font = fuentes[fontCounter];
         }
-        SetUserFont(fontCounter);
+        setUserFont(fontCounter);
     }
 
-    public void ChangeFontButton()
+    public void changeFontButton()
     {
         fontCounter++;
         //Comprobamos si está al final
@@ -178,18 +178,18 @@ public class OptionsPreferences : MonoBehaviour
             fontCounter = 0;
         }
 
-        SetFontToLabels();
+        setFontToLabels();
 
     }
 
     //SPEED SLIDER
-    public void SliderValueChanged()
+    public void sliderValueChanged()
     {
         speedGame.text = "Velocidad: " + sliderSpeed.value;
-        SetGameSpeed(sliderSpeed.value);
+        setGameSpeed(sliderSpeed.value);
     }
 
-    void SetGameSpeed(float _speed)
+    void setGameSpeed(float _speed)
     {
         PlayerPrefs.SetFloat("GameSpeed", _speed);
     }
@@ -199,13 +199,13 @@ public class OptionsPreferences : MonoBehaviour
         return PlayerPrefs.GetFloat("GameSpeed");
     }
 
-    void SetGameSpeedToSlider()
+    void setGameSpeedToSlider()
     {
         sliderSpeed.value = getGameSpeed();
         speedGame.text = "Velocidad: " + sliderSpeed.value;
     }
 
-    public void ChangeSpeedButton()
+    public void changeSpeedButton()
     {
         float counter = sliderSpeed.value;
 
@@ -214,42 +214,42 @@ public class OptionsPreferences : MonoBehaviour
         else
             counter++;
 
-        SetGameSpeed(counter);
-        SetGameSpeedToSlider();
+        setGameSpeed(counter);
+        setGameSpeedToSlider();
     }
 
     //GAME DIFFICULTY
-   public void SliderDifficultyChanged()
+   public void sliderDifficultyChanged()
     {
        switch ((int)sliderDifficulty.value)
         {
             case 0:
                 difficultyText.text = "Dificultad: sin pato";
-                SetGameDifficulty(0);
+                setGameDifficulty(0);
                 break;
             case 1:
                 difficultyText.text = "Dificultad: facil";
-                SetGameDifficulty(1);
+                setGameDifficulty(1);
                 break;
             case 2:
                 difficultyText.text = "Dificultad: mediano";
-                SetGameDifficulty(2);
+                setGameDifficulty(2);
                 break;
             case 3:
                 difficultyText.text = "Dificultad: dificil";
-                SetGameDifficulty(3);
+                setGameDifficulty(3);
                 break;
             default:
                 break;
         }
     }
 
-   void SetGameDifficulty(float _difficulty)
+   void setGameDifficulty(float _difficulty)
     {
         PlayerPrefs.SetFloat("GameDifficulty", _difficulty);
     }
 
-   public float GetGameDifficulty()
+   public float getGameDifficulty()
     {
         int value;
         switch ((int)PlayerPrefs.GetFloat("GameDifficulty")) {
@@ -275,7 +275,7 @@ public class OptionsPreferences : MonoBehaviour
 
     }
 
-    void SetDifficultyToSlider()
+    void setDifficultyToSlider()
     {
         sliderDifficulty.value = PlayerPrefs.GetFloat("GameDifficulty");
 
@@ -283,26 +283,26 @@ public class OptionsPreferences : MonoBehaviour
         {
             case 0:
                 difficultyText.text = "Dificultad: sin pato";
-                SetGameDifficulty(0);
+                setGameDifficulty(0);
                 break;
             case 1:
                 difficultyText.text = "Dificultad: facil";
-                SetGameDifficulty(1);
+                setGameDifficulty(1);
                 break;
             case 2:
                 difficultyText.text = "Dificultad: mediano";
-                SetGameDifficulty(2);
+                setGameDifficulty(2);
                 break;
             case 3:
                 difficultyText.text = "Dificultad: dificil";
-                SetGameDifficulty(3);
+                setGameDifficulty(3);
                 break;
             default:
                 break;
         }
     }
 
-    public void ChangeDifficultyButton()
+    public void changeDifficultyButton()
     {
        float counter = sliderDifficulty.value;
 
@@ -311,36 +311,36 @@ public class OptionsPreferences : MonoBehaviour
         else
             counter++;
 
-        SetGameDifficulty(counter);
-        SetDifficultyToSlider();
+        setGameDifficulty(counter);
+        setDifficultyToSlider();
     }
 
    
     //DEFAULT OPTIONS BUTTON
-    public void DefaultOptionsButton()
+    public void defaultOptionsButton()
     {
         DefaultOptions();
-        CheckAllOptions();
+        checkAllOptions();
 
     }
 
-    void CheckAllOptions()
+    void checkAllOptions()
     {
         checkVoiceActivated();
-        fontCounter = GetUserFont();
-        SetFontToLabels();
+        fontCounter = getUserFont();
+        setFontToLabels();
         checkAnimalSoundsActivated();
-        SetGameSpeedToSlider();
-        SetDifficultyToSlider();
+        setGameSpeedToSlider();
+        setDifficultyToSlider();
         
     }
 
-    public void CheckAllOptionsAfterLanguage()
+    public void checkAllOptionsAfterLanguage()
     {
         checkVoiceActivated();
         checkAnimalSoundsActivated();
-        SetGameSpeedToSlider();
-        SetDifficultyToSlider();
+        setGameSpeedToSlider();
+        setDifficultyToSlider();
     }
 }
 
