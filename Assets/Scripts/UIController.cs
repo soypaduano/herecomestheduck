@@ -12,7 +12,7 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
     //Paneles
     public GameObject panelInstrucciones, panelControles;
     [SerializeField]
-    Image imageFillInstrucciones, imageFillControles, imageInstruction, imageControl;
+    Image imageInstruction, imageControl;
     [SerializeField] //TODO: Queremos esto serialized?
     GameObject botonInstrucciones, botonControles;
     InstructionsController instructionsController;
@@ -30,10 +30,8 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         if (isTouchingInstrucciones)
         {
             tiempoInstrucciones += Time.deltaTime;
-            imageFillInstrucciones.fillAmount = imageFillInstrucciones.fillAmount + (Time.deltaTime / 2f);
             if (tiempoInstrucciones > 2.0f)
             {
-                imageFillInstrucciones.fillAmount = 0;
                 panelInstrucciones.SetActive(true);
                 isTouchingInstrucciones = false;
             }
@@ -42,10 +40,8 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         if (isTouchingControles)
         {
             tiempoControles += Time.deltaTime;
-            imageFillControles.fillAmount = imageFillControles.fillAmount + (Time.deltaTime / 2f);
             if (tiempoControles > 2.0f)
             {
-                imageFillControles.fillAmount = 0;
                 panelControles.SetActive(true);
                 isTouchingControles = false;
             }
@@ -57,11 +53,9 @@ public class UIController : MonoBehaviour, IPointerUpHandler, IPointerDownHandle
         //Reiniciamos todo lo de instrucciones
         isTouchingInstrucciones = false;
         tiempoInstrucciones = 0;
-        imageFillInstrucciones.fillAmount = 0;
         //Reiniciamos todo lo de controles
         isTouchingControles = false;
         tiempoControles = 0;
-        imageFillControles.fillAmount = 0;
     }
 
     public void OnPointerDown(PointerEventData data)

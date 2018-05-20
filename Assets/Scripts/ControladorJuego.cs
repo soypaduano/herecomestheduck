@@ -159,15 +159,6 @@ public class ControladorJuego : MonoBehaviour
 
     IEnumerator showAnimalCourutine(Animal _animal, int _randomNumber)
     {
-
-        string nombreAcento = "Ratón";
-        string formattedStringAnimal = nombreAcento;
-        byte[] tempBytes;
-        tempBytes = System.Text.Encoding.GetEncoding("ISO-8859-8").GetBytes(formattedStringAnimal);
-        string stringAsci = System.Text.Encoding.UTF8.GetString(tempBytes);
-
-        print(stringAsci);
-
         setImage(_animal.name);
         showHidePopUp(true);
         nameOfAnimal.text = Constantes.FirstLetterToUpper(_animal.name);
